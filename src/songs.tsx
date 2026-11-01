@@ -291,7 +291,7 @@ function SongDetail({
   const allAnswered = course.grammar.every((_, i) => `${course.id}-${i}` in answers);
   const score = course.grammar.filter((g, i) => answers[`${course.id}-${i}`] === g.answer).length;
   return (
-    <div className="song-detail">
+    <div className="song-detail motion-safe:animate-page-enter">
       <button className="back-link" onClick={back}>
         <ArrowLeft size={16} /> 플레이리스트로
       </button>
@@ -327,245 +327,252 @@ function SongDetail({
           </button>
         ))}
       </nav>
-      {step === 0 && (
-        <section className="song-listen">
-          <div className="section-title">
-            <h2>먼저, 좋아하는 곡을 들어요</h2>
-            <Headphones size={19} />
-          </div>
-          {player ? (
-            <div className="video-frame">
-              <iframe
-                title={`${course.title} 공식 음악 영상`}
-                src={`https://www.youtube-nocookie.com/embed/${course.videoId}?playsinline=1`}
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
+      <div key={step} className="lesson-page motion-safe:animate-page-enter">
+        {step === 0 && (
+          <section className="song-listen">
+            <div className="section-title">
+              <h2>먼저, 좋아하는 곡을 들어요</h2>
+              <Headphones size={19} />
             </div>
-          ) : (
-            <button className={`video-placeholder ${course.color}`} onClick={() => setPlayer(true)}>
-              <span className="play-circle">
-                <Play size={27} />
-              </span>
-              <strong lang="ja">{course.title}</strong>
-              <span>공식 영상 불러오기</span>
-            </button>
-          )}
-          <div className="video-links">
-            <a
-              href={`https://www.youtube.com/watch?v=${course.videoId}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              YouTube에서 듣기 <ExternalLink size={13} />
-            </a>
-            <a href={course.source} target="_blank" rel="noreferrer">
-              아티스트 공식 출처 <ExternalLink size={13} />
-            </a>
-          </div>
-          <p className="video-hint">
-            영상은 눌렀을 때 YouTube에서 불러옵니다. 인터넷 연결이 필요하며, 앱 내 재생이 제한되면
-            YouTube에서 열어 주세요.
-          </p>
-          <div className="listening-mission">
-            <span className="eyebrow">TODAY'S LISTENING NOTE</span>
-            <h3>어떤 장면이 떠오르나요?</h3>
-            <p>
-              모르는 말은 잠시 두고, {course.theme}에 어울리는 장면을 떠올려 보세요. 이어지는 창작
-              예문으로 그 장면을 말하는 연습을 해요.
+            {player ? (
+              <div className="video-frame">
+                <iframe
+                  title={`${course.title} 공식 음악 영상`}
+                  src={`https://www.youtube-nocookie.com/embed/${course.videoId}?playsinline=1`}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              </div>
+            ) : (
+              <button
+                className={`video-placeholder ${course.color}`}
+                onClick={() => setPlayer(true)}
+              >
+                <span className="play-circle">
+                  <Play size={27} />
+                </span>
+                <strong lang="ja">{course.title}</strong>
+                <span>공식 영상 불러오기</span>
+              </button>
+            )}
+            <div className="video-links">
+              <a
+                href={`https://www.youtube.com/watch?v=${course.videoId}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                YouTube에서 듣기 <ExternalLink size={13} />
+              </a>
+              <a href={course.source} target="_blank" rel="noreferrer">
+                아티스트 공식 출처 <ExternalLink size={13} />
+              </a>
+            </div>
+            <p className="video-hint">
+              영상은 눌렀을 때 YouTube에서 불러옵니다. 인터넷 연결이 필요하며, 앱 내 재생이 제한되면
+              YouTube에서 열어 주세요.
             </p>
-          </div>
-          <button className="primary" onClick={() => move(1)}>
-            단어 4개 만나기 <ArrowRight size={16} />
-          </button>
-        </section>
-      )}
-      {step === 1 && (
-        <section>
-          <div className="section-title">
-            <h2>오늘 가져갈 단어 4개</h2>
-            <span className="tiny-label">WORDS TO KEEP</span>
-          </div>
-          <div className="song-vocabulary">
-            {course.words.map((word, i) => (
-              <article className="word-card" key={word.word}>
-                <div>
-                  <span className="course-tag">N3 코스 · 복습 포함</span>
-                  <button
-                    className="sound"
-                    aria-label={`${word.word} 발음 듣기`}
-                    onClick={() => speak(word.reading)}
-                  >
-                    <Volume2 size={17} />
-                  </button>
-                </div>
-                <h2 lang="ja">{word.word}</h2>
-                <span>{word.reading}</span>
-                <h3>{word.meaning}</h3>
-                <p lang="ja">{word.example}</p>
-                <small>{word.translation}</small>
-                {done.includes(courseWordIds(index)[i]) && (
-                  <span className="learned">
-                    <Check size={12} />
-                    {wrong.includes(courseWordIds(index)[i]) ? '복습이 필요한 단어' : '확인한 단어'}
-                  </span>
-                )}
-              </article>
-            ))}
-          </div>
-          <div className="lesson-next">
-            <button className="primary" onClick={start}>
-              이 곡의 단어 퀴즈 <ArrowRight size={16} />
+            <div className="listening-mission">
+              <span className="eyebrow">TODAY'S LISTENING NOTE</span>
+              <h3>어떤 장면이 떠오르나요?</h3>
+              <p>
+                모르는 말은 잠시 두고, {course.theme}에 어울리는 장면을 떠올려 보세요. 이어지는 창작
+                예문으로 그 장면을 말하는 연습을 해요.
+              </p>
+            </div>
+            <button className="primary" onClick={() => move(1)}>
+              단어 4개 만나기 <ArrowRight size={16} />
             </button>
-            <button className="secondary-button" onClick={() => move(2)}>
-              문법으로 이어가기 <ArrowRight size={16} />
-            </button>
-          </div>
-          <p className="song-disclaimer">
-            이 단어와 예문은 코스 주제에 맞춰 선정·작성했어요. 가사에 나오는 단어 목록은 아닙니다.
-          </p>
-        </section>
-      )}
-      {step === 2 && (
-        <section>
-          <div className="section-title">
-            <h2>장면을 문장으로 바꾸는 문법</h2>
-            <span className="tiny-label">TWO EXPRESSIONS</span>
-          </div>
-          <div className="song-grammar">
-            {course.grammar.map((g, i) => (
-              <article key={g.pattern}>
-                <span className="eyebrow">GRAMMAR 0{i + 1}</span>
-                <h3>{g.pattern}</h3>
-                <b>{g.meaning}</b>
-                <p>{g.explanation}</p>
-                <div className="grammar-connection">연결 · {g.connection}</div>
-                <div className="song-example">
-                  <button
-                    className="sound"
-                    aria-label={`${g.pattern} 예문 듣기`}
-                    onClick={() => speak(g.example)}
-                  >
-                    <Volume2 size={17} />
-                  </button>
-                  <p lang="ja">{g.example}</p>
-                  <small>{g.translation}</small>
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="lesson-next">
-            <button className="primary" onClick={() => move(3)}>
-              문법 확인 문제 풀기 <ArrowRight size={16} />
-            </button>
-          </div>
-        </section>
-      )}
-      {step === 3 && (
-        <section>
-          <div className="section-title">
-            <h2>이해했는지, 가볍게 확인해요</h2>
-            <span className="tiny-label">CHECK & REMEMBER</span>
-          </div>
-          <div className="song-questions">
-            {course.grammar.map((g, i) => {
-              const key = `${course.id}-${i}`,
-                answered = key in answers,
-                correct = answers[key] === g.answer;
-              return (
-                <article key={key}>
-                  <span className="eyebrow">QUESTION 0{i + 1}</span>
-                  <h3>{g.question}</h3>
-                  <p className="question-sentence" lang="ja">
-                    {g.sentence}
-                  </p>
-                  <div className="answers">
-                    {g.choices.map((value, j) => (
-                      <button
-                        key={value}
-                        disabled={answered}
-                        className={
-                          answered
-                            ? j === g.answer
-                              ? 'correct'
-                              : j === answers[key]
-                                ? 'incorrect'
-                                : ''
-                            : ''
-                        }
-                        onClick={() => choose(i, j)}
-                      >
-                        {value}
-                        {answered && j === g.answer && <Check size={16} />}
-                      </button>
-                    ))}
+          </section>
+        )}
+        {step === 1 && (
+          <section>
+            <div className="section-title">
+              <h2>오늘 가져갈 단어 4개</h2>
+              <span className="tiny-label">WORDS TO KEEP</span>
+            </div>
+            <div className="song-vocabulary">
+              {course.words.map((word, i) => (
+                <article className="word-card" key={word.word}>
+                  <div>
+                    <span className="course-tag">N3 코스 · 복습 포함</span>
+                    <button
+                      className="sound"
+                      aria-label={`${word.word} 발음 듣기`}
+                      onClick={() => speak(word.reading)}
+                    >
+                      <Volume2 size={17} />
+                    </button>
                   </div>
-                  {answered && (
-                    <div className="question-explanation" role="status">
-                      <strong>
-                        {correct ? '잘 이해했어요!' : '괜찮아요, 이유를 함께 볼까요?'}
-                      </strong>
-                      <p>{g.reason}</p>
-                    </div>
+                  <h2 lang="ja">{word.word}</h2>
+                  <span>{word.reading}</span>
+                  <h3>{word.meaning}</h3>
+                  <p lang="ja">{word.example}</p>
+                  <small>{word.translation}</small>
+                  {done.includes(courseWordIds(index)[i]) && (
+                    <span className="learned">
+                      <Check size={12} />
+                      {wrong.includes(courseWordIds(index)[i])
+                        ? '복습이 필요한 단어'
+                        : '확인한 단어'}
+                    </span>
                   )}
                 </article>
-              );
-            })}
-          </div>
-          {allAnswered && (
-            <div className="song-result" role="status">
-              <span>
-                <Check size={21} />
-                문법 {score} / 2 정답
-              </span>
-              <p>
-                {score === 2
-                  ? '두 표현을 모두 이해했어요. 단어까지 확인하면 코스 완료예요.'
-                  : '틀린 문제는 플레이리스트의 문법 오답에 모았어요.'}
-              </p>
-              <button className="secondary-button" onClick={reset}>
-                <RotateCcw size={14} /> 문법 다시 풀기
+              ))}
+            </div>
+            <div className="lesson-next">
+              <button className="primary" onClick={start}>
+                이 곡의 단어 퀴즈 <ArrowRight size={16} />
+              </button>
+              <button className="secondary-button" onClick={() => move(2)}>
+                문법으로 이어가기 <ArrowRight size={16} />
               </button>
             </div>
-          )}
-          <section className="listening-note">
-            <h3>이 곡에 남기는 나의 한 줄</h3>
-            <label htmlFor="song-note">떠오른 장면이나 오늘 배운 표현을 기록해 보세요.</label>
-            <textarea
-              id="song-note"
-              value={note}
-              maxLength={2000}
-              onChange={(e) => {
-                setNote(e.target.value);
-                setNoteStatus('');
-              }}
-              placeholder="오늘 기억할 단어는…"
-            />
-            <div className="note-actions">
-              <span role="status">{noteStatus || '이 브라우저에만 저장돼요.'}</span>
-              <button
-                className="note-save"
-                onClick={() => {
-                  try {
-                    localStorage.setItem(`haru-song-note-${course.id}`, note);
-                    setNoteStatus('이 곡의 노트를 저장했어요.');
-                  } catch {
-                    setNoteStatus('저장 공간을 확인해 주세요.');
-                  }
-                }}
-              >
-                노트 저장
+            <p className="song-disclaimer">
+              이 단어와 예문은 코스 주제에 맞춰 선정·작성했어요. 가사에 나오는 단어 목록은 아닙니다.
+            </p>
+          </section>
+        )}
+        {step === 2 && (
+          <section>
+            <div className="section-title">
+              <h2>장면을 문장으로 바꾸는 문법</h2>
+              <span className="tiny-label">TWO EXPRESSIONS</span>
+            </div>
+            <div className="song-grammar">
+              {course.grammar.map((g, i) => (
+                <article key={g.pattern}>
+                  <span className="eyebrow">GRAMMAR 0{i + 1}</span>
+                  <h3>{g.pattern}</h3>
+                  <b>{g.meaning}</b>
+                  <p>{g.explanation}</p>
+                  <div className="grammar-connection">연결 · {g.connection}</div>
+                  <div className="song-example">
+                    <button
+                      className="sound"
+                      aria-label={`${g.pattern} 예문 듣기`}
+                      onClick={() => speak(g.example)}
+                    >
+                      <Volume2 size={17} />
+                    </button>
+                    <p lang="ja">{g.example}</p>
+                    <small>{g.translation}</small>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="lesson-next">
+              <button className="primary" onClick={() => move(3)}>
+                문법 확인 문제 풀기 <ArrowRight size={16} />
               </button>
             </div>
           </section>
-          <div className="lesson-next">
-            <button className="primary" onClick={back}>
-              다른 곡 만나기 <ArrowRight size={16} />
-            </button>
-          </div>
-        </section>
-      )}
+        )}
+        {step === 3 && (
+          <section>
+            <div className="section-title">
+              <h2>이해했는지, 가볍게 확인해요</h2>
+              <span className="tiny-label">CHECK & REMEMBER</span>
+            </div>
+            <div className="song-questions">
+              {course.grammar.map((g, i) => {
+                const key = `${course.id}-${i}`,
+                  answered = key in answers,
+                  correct = answers[key] === g.answer;
+                return (
+                  <article key={key}>
+                    <span className="eyebrow">QUESTION 0{i + 1}</span>
+                    <h3>{g.question}</h3>
+                    <p className="question-sentence" lang="ja">
+                      {g.sentence}
+                    </p>
+                    <div className="answers">
+                      {g.choices.map((value, j) => (
+                        <button
+                          key={value}
+                          disabled={answered}
+                          className={
+                            answered
+                              ? j === g.answer
+                                ? 'correct'
+                                : j === answers[key]
+                                  ? 'incorrect'
+                                  : ''
+                              : ''
+                          }
+                          onClick={() => choose(i, j)}
+                        >
+                          {value}
+                          {answered && j === g.answer && <Check size={16} />}
+                        </button>
+                      ))}
+                    </div>
+                    {answered && (
+                      <div className="question-explanation" role="status">
+                        <strong>
+                          {correct ? '잘 이해했어요!' : '괜찮아요, 이유를 함께 볼까요?'}
+                        </strong>
+                        <p>{g.reason}</p>
+                      </div>
+                    )}
+                  </article>
+                );
+              })}
+            </div>
+            {allAnswered && (
+              <div className="song-result" role="status">
+                <span>
+                  <Check size={21} />
+                  문법 {score} / 2 정답
+                </span>
+                <p>
+                  {score === 2
+                    ? '두 표현을 모두 이해했어요. 단어까지 확인하면 코스 완료예요.'
+                    : '틀린 문제는 플레이리스트의 문법 오답에 모았어요.'}
+                </p>
+                <button className="secondary-button" onClick={reset}>
+                  <RotateCcw size={14} /> 문법 다시 풀기
+                </button>
+              </div>
+            )}
+            <section className="listening-note">
+              <h3>이 곡에 남기는 나의 한 줄</h3>
+              <label htmlFor="song-note">떠오른 장면이나 오늘 배운 표현을 기록해 보세요.</label>
+              <textarea
+                id="song-note"
+                value={note}
+                maxLength={2000}
+                onChange={(e) => {
+                  setNote(e.target.value);
+                  setNoteStatus('');
+                }}
+                placeholder="오늘 기억할 단어는…"
+              />
+              <div className="note-actions">
+                <span role="status">{noteStatus || '이 브라우저에만 저장돼요.'}</span>
+                <button
+                  className="note-save"
+                  onClick={() => {
+                    try {
+                      localStorage.setItem(`haru-song-note-${course.id}`, note);
+                      setNoteStatus('이 곡의 노트를 저장했어요.');
+                    } catch {
+                      setNoteStatus('저장 공간을 확인해 주세요.');
+                    }
+                  }}
+                >
+                  노트 저장
+                </button>
+              </div>
+            </section>
+            <div className="lesson-next">
+              <button className="primary" onClick={back}>
+                다른 곡 만나기 <ArrowRight size={16} />
+              </button>
+            </div>
+          </section>
+        )}
+      </div>
     </div>
   );
 }

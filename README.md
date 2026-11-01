@@ -52,3 +52,9 @@ npm run format:check  # 정리가 필요한 파일 확인
 ```
 
 VS Code에서 저장할 때 자동 정리하려면 Prettier 확장을 설치하고 기본 포맷터를 Prettier로 지정한 뒤 `Format On Save`를 켜세요. 저장소에는 개인 편집기 설정을 포함하지 않습니다. 설정은 `.prettierrc.json`, 제외 대상은 `.prettierignore`에 있습니다. 빌드 결과와 인증 파일, 개인 학습 메모는 포맷 대상에서도 제외합니다.
+
+## 다크 테마와 모션
+
+Tailwind CSS의 Vite 플러그인을 사용합니다. 공통 색상과 모션 토큰은 `src/style.css`의 `@theme`, 다크 컴포넌트 표현은 `src/theme.css`에 있습니다. 기존 레이아웃은 components 레이어에 유지하고 유틸리티가 필요한 부분을 덮어쓸 수 있게 구성했습니다. Tailwind Preflight는 적용하지 않습니다.
+
+기본 배경은 짙은 남색이고, 본문·보조 글자·버튼·정답·오답 상태를 구분했습니다. 페이지 진입과 학습 단계 전환, 모달·해설에는 짧은 모션을 적용합니다. `prefers-reduced-motion`에서는 애니메이션·전환을 끕니다.

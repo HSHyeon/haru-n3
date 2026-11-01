@@ -1,0 +1,667 @@
+@reference './style.css';
+
+/* Midnight listening room. Shared Tailwind tokens keep surfaces consistent. */
+@layer components {
+  :root {
+    color-scheme: dark;
+    color: var(--color-ink);
+    background: var(--color-night);
+    --haru-soft: #b4c2d7;
+    --haru-faint: #9eafc8;
+    --haru-surface: #131e30;
+    --haru-line: #34465f;
+  }
+  body {
+    background: var(--color-night);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: #b6d3ff;
+    color: #0a101b;
+  }
+  .shell {
+    background: radial-gradient(ellipse at 90% 0, #1b2e462e, transparent 45%), var(--color-night);
+  }
+  aside,
+  header {
+    background: #0d1522;
+    border-color: #29394f;
+  }
+  header {
+    color: #b4c2d7;
+  }
+  .logo {
+    color: #f2f5fa;
+  }
+  .logo-icon {
+    background: #b6d3ff;
+    color: #14243c;
+    box-shadow: 0 0 28px #8ebcff12;
+  }
+  .logo-dot,
+  .sun {
+    color: #e0c58f;
+  }
+  .workspace-label {
+    color: #9eafc8;
+  }
+  nav button {
+    color: #b4c2d7;
+  }
+  nav button.active,
+  .lesson-steps button.selected {
+    color: #e0edff;
+    background: #243b5b;
+    box-shadow: inset 0 0 0 1px #405d80;
+  }
+  nav button:hover {
+    background: #1c2c43;
+    color: #f1f5fc;
+  }
+  .badge {
+    background: #b6d3ff;
+    color: #162a47;
+  }
+  .side-note,
+  .side-note p,
+  .side-note > span {
+    color: #aabdd6;
+  }
+  .profile {
+    border-color: #29394f;
+    color: #dce8f9;
+  }
+  .profile small {
+    color: #aabbd0;
+  }
+  .profile > div,
+  .avatar {
+    background: #263b56;
+    color: #e2edfc;
+    border-color: #34465f;
+  }
+  .online {
+    background: #b4d6bd;
+    box-shadow: 0 0 10px #b4d6bd22;
+  }
+  .level {
+    color: #c6dcfa;
+    background: #16253a;
+    border-color: #3c516e;
+  }
+  .eyebrow,
+  .course-tag,
+  .tiny-label {
+    color: #a9bfdd;
+  }
+  .greeting h1 {
+    color: #f3f6fc;
+  }
+  .greeting p,
+  .date {
+    color: #b4c2d7;
+  }
+
+  .hero.music-hero {
+    background:
+      radial-gradient(ellipse at 90% 15%, #3c577c55, transparent 65%),
+      linear-gradient(120deg, #182a43, #152238);
+    border: 1px solid #425b7b;
+    box-shadow: 0 20px 60px #0000001f;
+  }
+  .music-hero .pill {
+    background: #ffffff06;
+    border-color: #557195;
+    color: #cfdef3;
+  }
+  .music-hero h2 {
+    color: #f7f8fc;
+  }
+  .music-hero p {
+    color: #c1cfe3;
+  }
+  .music-hero .hero-meta {
+    color: #adbfda;
+  }
+  .primary,
+  .music-hero .primary {
+    background: #b6d3ff;
+    color: #122139;
+    border: 1px solid #c4ddff;
+    box-shadow: 0 4px 15px #050b151a;
+    font-weight: 600;
+    min-height: 43px;
+  }
+  .primary:hover,
+  .music-hero .primary:hover {
+    background: #d4e6ff;
+    color: #0c1b30;
+  }
+  .primary:disabled {
+    opacity: 0.45;
+  }
+  .record-caption {
+    color: #c4d5eb;
+  }
+  .star {
+    color: #e0c58f;
+  }
+  .moon-disc {
+    border-color: #637a9a40;
+  }
+  .moon-disc::after {
+    border-color: #637a9a40;
+  }
+
+  .listening-banner,
+  .stats,
+  .course,
+  .expression,
+  .word-card,
+  .grammar-card,
+  .music-word,
+  .listening-note,
+  .pwa-panel,
+  .song-card,
+  .foundation-link,
+  .song-listen,
+  .song-grammar > article,
+  .song-questions > article {
+    @apply bg-panel border-line text-ink;
+    box-shadow: 0 6px 24px #00000012;
+  }
+  .listening-banner:hover,
+  .foundation-link:hover {
+    background: #1b2a40;
+    border-color: #607a9b;
+  }
+  .listening-banner b,
+  .foundation-link b {
+    color: #e3edfc;
+  }
+  .listening-banner small,
+  .foundation-link small {
+    color: #b4c2d7;
+  }
+  .listening-banner > svg,
+  .foundation-link > svg {
+    color: #b6d3ff;
+  }
+  .listening-banner-icon,
+  .pwa-symbol {
+    color: #b6d3ff;
+    background: #263b56;
+  }
+  .stats > div {
+    border-color: #34465f;
+  }
+  .stats > div > div > span,
+  .stats strong small {
+    color: #b4c2d7;
+  }
+  .stats strong {
+    color: #f1f5fc;
+  }
+  .stat-tip {
+    color: #e2cba5;
+    background: #453827;
+  }
+  .orange,
+  .peach {
+    background: #3c302a;
+    color: #e7bf94;
+  }
+  .green {
+    background: #253e3c;
+    color: #bddbd0;
+  }
+  .purple {
+    background: #332f49;
+    color: #d4c6f3;
+  }
+  .course:hover {
+    background: #1a2a40;
+    border-color: #607a9b;
+    box-shadow: 0 12px 28px #00000024;
+  }
+  .course h3 {
+    color: #f1f5fc;
+  }
+  .course p,
+  .course > div,
+  .section-title h2 > span {
+    color: #b4c2d7;
+  }
+  .course > div,
+  .expression-foot,
+  .song-progress-label {
+    border-color: #34465f;
+  }
+  .circle-btn,
+  .sound {
+    background: #1b2a40;
+    color: #c2dcff;
+    border-color: #4b6281;
+  }
+  .sound:hover,
+  .circle-btn:hover {
+    background: #2a4262;
+    border-color: #8cafd9;
+  }
+  .goal,
+  .music-intro,
+  .music-practice,
+  .song-library-intro,
+  .song-result,
+  .song-grammar-review,
+  .feedback,
+  .question-explanation,
+  .example {
+    background: #19283e;
+    border-color: #3d536f;
+    color: #f1f5fc;
+  }
+  .goal > span,
+  .goal b,
+  .goal > div:not(.progress),
+  .quote-row span,
+  .expression-foot,
+  .goal p,
+  .music-intro p,
+  .music-practice p {
+    color: #b9cbe2;
+  }
+  .quote-row p {
+    color: #edf4ff;
+  }
+  .progress,
+  .mini-progress {
+    background: #33445e;
+  }
+  .progress i,
+  .mini-progress i {
+    background: #b6d3ff;
+    transition: width 300ms var(--ease-haru);
+  }
+  .word-card > span,
+  .word-card small,
+  .grammar-card p,
+  .list-toolbar small,
+  .song-vocabulary .word-card > span,
+  .song-vocabulary .word-card small {
+    color: #b4c2d7;
+  }
+  .word-card .learned {
+    color: #b8dbc4;
+  }
+  .text-link {
+    color: #c6dcfa;
+  }
+  .empty {
+    background: #131e30;
+    border-color: #516987;
+    color: #b6d3ff;
+  }
+  .empty h2 {
+    color: #f1f5fc;
+  }
+  .empty p {
+    color: #b4c2d7;
+  }
+  footer {
+    border-color: #29394f;
+    color: #b4c2d7;
+  }
+  .footer-brand {
+    color: #c5d7ef;
+  }
+  .footer-brand > span {
+    color: #e0c58f;
+  }
+
+  .music-intro-tags span,
+  .collection-meta span,
+  .song-card-tags > span {
+    background: #253952;
+    color: #d2e2f7;
+    border-color: #415978;
+  }
+  .room-symbol {
+    border-color: #4b6281;
+    color: #aec5e2;
+  }
+  .room-symbol > svg + svg {
+    color: #e0c58f;
+  }
+  .music-toolbar p,
+  .guide-toggle {
+    color: #b4c2d7;
+  }
+  .guide-toggle input {
+    accent-color: #b6d3ff;
+  }
+  .music-word-top {
+    color: #b6cce7;
+  }
+  .music-kanji {
+    color: #eef5ff;
+  }
+  .music-word-body > div > span,
+  .music-word-body small {
+    color: #b4c2d7;
+  }
+  .music-word > p {
+    border-color: #34465f;
+    color: #e6effd;
+  }
+  .music-word > small {
+    color: #b4c2d7;
+  }
+  .music-credit,
+  .song-disclaimer,
+  .video-hint {
+    color: #aebed4;
+  }
+  .listening-note label,
+  .note-actions > span {
+    color: #b4c2d7;
+  }
+  .listening-note textarea {
+    background: #0d1625;
+    color: #f1f5fc;
+    border-color: #4b6281;
+  }
+  .listening-note textarea::placeholder {
+    color: #a4b5cd;
+  }
+  .note-save,
+  .pwa-action,
+  .secondary-button {
+    background: #233954;
+    color: #d8e8ff;
+    border-color: #526c8f;
+  }
+  .note-save:hover,
+  .pwa-action:hover,
+  .secondary-button:hover {
+    background: #304d70;
+    border-color: #88aacf;
+  }
+  .pwa-copy p,
+  .pwa-status,
+  .pwa-help,
+  .pwa-help small,
+  .pwa-help .pwa-private,
+  .pwa-update span {
+    color: #b4c2d7;
+  }
+  .pwa-copy h2,
+  .pwa-help h3,
+  .pwa-help b {
+    color: #e3edfc;
+  }
+  .pwa-help,
+  .pwa-update {
+    border-color: #34465f;
+  }
+
+  .song-library-intro {
+    background: radial-gradient(ellipse at 100% 0, #31466944, transparent 65%), #17263d;
+    border-color: #405978;
+  }
+  .song-library-intro p {
+    color: #b9cbe2;
+  }
+  .collection-art {
+    box-shadow: 0 20px 40px #00000040;
+  }
+  .song-card-body h3 {
+    color: #f1f5fc;
+  }
+  .song-card-body > p,
+  .song-progress-label {
+    color: #b4c2d7;
+  }
+  .song-card-tags .song-completed {
+    color: #c8ebd1;
+    background: #264535;
+  }
+  .summer {
+    background: linear-gradient(145deg, #385d7c, #182f4d);
+  }
+  .flower {
+    background: linear-gradient(145deg, #655d7c, #302e4a);
+  }
+  .spring {
+    background: linear-gradient(145deg, #4b7066, #243c38);
+  }
+  .song-cover {
+    color: #f5f7fc;
+  }
+  .song-cover > small {
+    opacity: 0.85;
+  }
+  .song-detail-heading {
+    border: 1px solid #5f789070;
+    color: #f5f7fc;
+  }
+  .song-detail-heading .eyebrow,
+  .song-title-reading,
+  .song-detail-heading > p {
+    color: #dfebf7;
+  }
+  .song-detail-heading .song-card-tags > span {
+    color: #f1f5fc;
+    background: #ffffff18;
+  }
+  .lesson-steps {
+    background: #101a2a;
+    border: 1px solid #34465f;
+  }
+  .lesson-steps button {
+    color: #b4c2d7;
+  }
+  .lesson-steps button > span {
+    color: #abc0da;
+  }
+  .back-link {
+    color: #c4dafa;
+  }
+  .video-links a {
+    color: #c3dcff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .listening-mission,
+  .song-example {
+    border-color: #34465f;
+  }
+  .listening-mission p,
+  .song-grammar > article > p,
+  .song-example > small,
+  .question-explanation p,
+  .song-result p,
+  .song-grammar-review > p {
+    color: #b4c2d7;
+  }
+  .song-grammar b {
+    color: #c3dcff;
+  }
+  .grammar-connection {
+    background: #0e192a;
+    color: #cadcf3;
+    border: 1px solid #34465f;
+  }
+  .grammar-review-link {
+    background: #131e30;
+    border-color: #4b6281;
+    color: #e0ebfa;
+  }
+  .song-storage-error {
+    color: #ffc1b0;
+  }
+  .modal-backdrop {
+    background: #020711b8;
+    backdrop-filter: blur(9px);
+  }
+  .modal {
+    background: #142136;
+    color: #f1f5fc;
+    border: 1px solid #4d6687;
+    box-shadow: 0 30px 100px #00000080;
+  }
+  .close {
+    color: #c5d7ef;
+    border-radius: 7px;
+  }
+  .close:hover {
+    background: #293e5b;
+  }
+  .quiz-prompt,
+  .quiz-reading,
+  .feedback small,
+  .result p,
+  .grammar-detail > p,
+  .example small {
+    color: #bbcee6;
+  }
+  .result {
+    color: #c3dcbc;
+  }
+  .result h2 {
+    color: #f1f5fc;
+  }
+  .example > span {
+    color: #c5d7ef;
+  }
+  .answers button {
+    background: #1c2e48;
+    color: #eaf2ff;
+    border-color: #526b8c;
+    min-height: 48px;
+  }
+  .answers button:not(:disabled):hover {
+    background: #2a4466;
+    border-color: #9cbce4;
+  }
+  .answers button.correct {
+    background: #213f32;
+    color: #d4f2dd;
+    border-color: #8fcca3;
+  }
+  .answers button.incorrect {
+    background: #4b2b31;
+    color: #ffdcda;
+    border-color: #de9695;
+  }
+  .mobile-nav {
+    background: #0d1522f2;
+    border-color: #3a4e69;
+    box-shadow: 0 -8px 30px #00000024;
+  }
+  .mobile-nav button {
+    color: #b5c5dc;
+  }
+  .mobile-nav button.active {
+    background: #253c59;
+    color: #eff6ff;
+    box-shadow: inset 0 0 0 1px #4b6585;
+  }
+  button:focus-visible,
+  a:focus-visible,
+  textarea:focus-visible,
+  input:focus-visible {
+    outline: 3px solid #d9c28e;
+    outline-offset: 4px;
+  }
+
+  /* Short, interruptible motion. No perpetual spinning or parallax. */
+  button,
+  a,
+  .course,
+  .song-card,
+  .word-card,
+  textarea {
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease,
+      box-shadow 220ms ease,
+      transform 220ms var(--ease-haru);
+  }
+  .modal-backdrop {
+    animation: backdrop-enter 160ms ease-out both;
+  }
+  .modal {
+    animation: dialog-enter 220ms var(--ease-haru) both;
+    transform-origin: 50% 60%;
+  }
+  .feedback,
+  .question-explanation,
+  .song-result,
+  .pwa-help,
+  .pwa-update {
+    animation: feedback-enter 180ms var(--ease-haru) both;
+  }
+  .primary:active,
+  .secondary-button:active,
+  .song-card:active,
+  .course:active {
+    transform: scale(0.985);
+  }
+  @keyframes backdrop-enter {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes dialog-enter {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes feedback-enter {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (hover: hover) {
+    .song-card:hover,
+    .course:hover {
+      transform: translateY(-3px);
+    }
+    .primary:hover {
+      transform: translateY(-1px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+    .primary:active,
+    .secondary-button:active,
+    .song-card:active,
+    .course:active,
+    .song-card:hover,
+    .course:hover,
+    .primary:hover {
+      transform: none;
+    }
+  }
+}

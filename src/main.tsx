@@ -17,6 +17,7 @@ import {
   Music2,
 } from 'lucide-react';
 import './style.css';
+import './theme.css';
 import { PwaControls } from './pwa';
 import { musicWords, RecordArt } from './music';
 import { SongLibrary, songWords, SONG_WORD_OFFSET } from './songs';
@@ -150,7 +151,7 @@ function App() {
   };
   const percentage = Math.round((saved.done.length / words.length) * 100);
   return (
-    <div className="shell">
+    <div className="shell bg-night text-ink antialiased">
       <aside>
         <a className="logo" href="#" onClick={() => setTab('홈')}>
           <span className="logo-icon">は</span> 하루<span className="logo-dot">.</span>
@@ -203,289 +204,294 @@ function App() {
           </div>
         </header>
         <div className="content">
-          <div className="greeting">
-            <div>
-              <div className="eyebrow">JAPANESE, ON REPEAT</div>
-              <h1>
-                {tab === '홈'
-                  ? '좋아하는 마음으로, 한 걸음'
-                  : tab === '단어장'
-                    ? '차곡차곡, 나의 단어'
-                    : tab === '문법 노트'
-                      ? '문장이 보이는 문법'
-                      : tab === '음악 공부방'
-                        ? '나의 작은 음악 공부방'
-                        : '다시 만나면, 내 것이 돼요'}
-                <span className="sun">☾</span>
-              </h1>
-              <p>
-                {tab === '홈'
-                  ? '좋아하는 J-pop이 조금 더 들리는 순간을 위해, 오늘도 10분.'
-                  : tab === '단어장'
-                    ? '읽고, 듣고, 퀴즈로 기억해 보세요.'
-                    : tab === '문법 노트'
-                      ? '예문과 함께 N3 문법의 쓰임을 익혀 보세요.'
-                      : tab === '음악 공부방'
-                        ? '좋아하는 곡을 고르고, N3 표현을 하나씩 익혀 보세요.'
-                        : '틀려도 괜찮아요. 한 번 더 기억할 기회니까요.'}
-              </p>
+          <div key={tab} className="page-view motion-safe:animate-page-enter">
+            <div className="greeting">
+              <div>
+                <div className="eyebrow">JAPANESE, ON REPEAT</div>
+                <h1>
+                  {tab === '홈'
+                    ? '좋아하는 마음으로, 한 걸음'
+                    : tab === '단어장'
+                      ? '차곡차곡, 나의 단어'
+                      : tab === '문법 노트'
+                        ? '문장이 보이는 문법'
+                        : tab === '음악 공부방'
+                          ? '나의 작은 음악 공부방'
+                          : '다시 만나면, 내 것이 돼요'}
+                  <span className="sun">☾</span>
+                </h1>
+                <p>
+                  {tab === '홈'
+                    ? '좋아하는 J-pop이 조금 더 들리는 순간을 위해, 오늘도 10분.'
+                    : tab === '단어장'
+                      ? '읽고, 듣고, 퀴즈로 기억해 보세요.'
+                      : tab === '문법 노트'
+                        ? '예문과 함께 N3 문법의 쓰임을 익혀 보세요.'
+                        : tab === '음악 공부방'
+                          ? '좋아하는 곡을 고르고, N3 표현을 하나씩 익혀 보세요.'
+                          : '틀려도 괜찮아요. 한 번 더 기억할 기회니까요.'}
+                </p>
+              </div>
+              <span className="date">
+                {new Date().toLocaleDateString('ko-KR', {
+                  month: 'long',
+                  day: 'numeric',
+                  weekday: 'long',
+                })}
+              </span>
             </div>
-            <span className="date">
-              {new Date().toLocaleDateString('ko-KR', {
-                month: 'long',
-                day: 'numeric',
-                weekday: 'long',
-              })}
-            </span>
-          </div>
-          {tab === '홈' ? (
-            <>
-              <section className="hero music-hero">
-                <div className="hero-copy">
-                  <span className="pill">
-                    <Music2 size={12} /> 오늘의 작은 플레이리스트
+            {tab === '홈' ? (
+              <>
+                <section className="hero music-hero">
+                  <div className="hero-copy">
+                    <span className="pill">
+                      <Music2 size={12} /> 오늘의 작은 플레이리스트
+                    </span>
+                    <h2>
+                      좋아하는 노래에,
+                      <br />한 단어 더 가까이.
+                    </h2>
+                    <p>
+                      요루시카를 듣는 밤, 일본어를 배우는 나.
+                      <br />
+                      좋아하는 3곡으로 N3 단어와 문법을 익혀요.
+                    </p>
+                    <button className="primary" onClick={() => setTab('음악 공부방')}>
+                      음악 공부방 들어가기 <ArrowRight size={18} />
+                    </button>
+                    <div className="hero-meta">
+                      요루시카 3곡 <span>·</span> 단어 12개 · 문법 6개
+                    </div>
+                  </div>
+                  <RecordArt />
+                </section>
+                <button
+                  className="listening-banner"
+                  onClick={() => start(n3Words.map((_, i) => i))}
+                >
+                  <span className="listening-banner-icon">
+                    <BookOpen size={20} />
                   </span>
-                  <h2>
-                    좋아하는 노래에,
-                    <br />한 단어 더 가까이.
-                  </h2>
-                  <p>
-                    요루시카를 듣는 밤, 일본어를 배우는 나.
-                    <br />
-                    좋아하는 3곡으로 N3 단어와 문법을 익혀요.
-                  </p>
-                  <button className="primary" onClick={() => setTab('음악 공부방')}>
-                    음악 공부방 들어가기 <ArrowRight size={18} />
-                  </button>
-                  <div className="hero-meta">
-                    요루시카 3곡 <span>·</span> 단어 12개 · 문법 6개
-                  </div>
-                </div>
-                <RecordArt />
-              </section>
-              <button className="listening-banner" onClick={() => start(n3Words.map((_, i) => i))}>
-                <span className="listening-banner-icon">
-                  <BookOpen size={20} />
-                </span>
-                <span>
-                  <b>오늘의 N3 공부도, 차근차근.</b>
-                  <small>일상 단어 {n3Words.length}개로 시험 공부 이어가기</small>
-                </span>
-                <ArrowRight size={18} />
-              </button>
-              <div className="stats">
-                <div>
-                  <span className="stat-icon orange">
-                    <Flame size={21} />
+                  <span>
+                    <b>오늘의 N3 공부도, 차근차근.</b>
+                    <small>일상 단어 {n3Words.length}개로 시험 공부 이어가기</small>
                   </span>
-                  <div>
-                    <span>학습한 날</span>
-                    <strong>
-                      {saved.dates.length}
-                      <small>일</small>
-                    </strong>
-                  </div>
-                  <span className="stat-tip">꾸준함의 시작</span>
-                </div>
-                <div>
-                  <span className="stat-icon green">
-                    <Layers size={21} />
-                  </span>
-                  <div>
-                    <span>만나본 단어</span>
-                    <strong>
-                      {saved.done.length}
-                      <small>/ {words.length}개</small>
-                    </strong>
-                  </div>
-                  <div className="mini-progress">
-                    <i style={{ width: percentage + '%' }} />
-                  </div>
-                </div>
-                <div>
-                  <span className="stat-icon purple">
-                    <RotateCcw size={21} />
-                  </span>
-                  <div>
-                    <span>복습할 단어</span>
-                    <strong>
-                      {saved.wrong.length}
-                      <small>개</small>
-                    </strong>
-                  </div>
-                  <button
-                    className="circle-btn"
-                    aria-label="오답 복습 열기"
-                    onClick={() => setTab('오답 복습')}
-                  >
-                    <ArrowUpRight size={19} />
-                  </button>
-                </div>
-              </div>
-              <div className="section-title">
-                <h2>
-                  오늘의 학습 코스 <span>나에게 맞는 작은 루틴</span>
-                </h2>
-                <span className="tiny-label">LET'S STUDY</span>
-              </div>
-              <div className="courses">
-                <button className="course" onClick={() => start(allIds)}>
-                  <span className="course-icon green">
-                    <Layers />
-                  </span>
-                  <span className="course-tag">VOCABULARY</span>
-                  <h3>단어 한 줌</h3>
-                  <p>기초 음악 단어부터 N3 일상 단어까지</p>
-                  <div>
-                    <span>{words.length}개 단어 · 나만의 복습</span>
-                    <ArrowUpRight size={20} />
-                  </div>
+                  <ArrowRight size={18} />
                 </button>
-                <button className="course" onClick={() => setTab('문법 노트')}>
-                  <span className="course-icon peach">
-                    <BookOpen />
-                  </span>
-                  <span className="course-tag">GRAMMAR</span>
-                  <h3>문법 한 페이지</h3>
-                  <p>예문으로 이해하는 문장의 규칙</p>
+                <div className="stats">
                   <div>
-                    <span>{grammar.length}개 표현 · 약 5분</span>
-                    <ArrowUpRight size={20} />
-                  </div>
-                </button>
-                <button className="course" onClick={() => setTab('오답 복습')}>
-                  <span className="course-icon purple">
-                    <RotateCcw />
-                  </span>
-                  <span className="course-tag">REVIEW</span>
-                  <h3>기억 다시 꺼내기</h3>
-                  <p>헷갈렸던 단어를 확실한 내 것으로</p>
-                  <div>
-                    <span>오답 {saved.wrong.length}개 · 나만의 복습</span>
-                    <ArrowUpRight size={20} />
-                  </div>
-                </button>
-              </div>
-              <section className="bottom-grid">
-                <div className="expression">
-                  <div className="section-title">
-                    <h2>음악으로 여는 한 문장</h2>
-                    <span className="tiny-label">DAILY JAPANESE</span>
-                  </div>
-                  <div className="quote-row">
+                    <span className="stat-icon orange">
+                      <Flame size={21} />
+                    </span>
                     <div>
-                      <p lang="ja">音楽が好きです。</p>
-                      <span>음악을 좋아해요.</span>
+                      <span>학습한 날</span>
+                      <strong>
+                        {saved.dates.length}
+                        <small>일</small>
+                      </strong>
+                    </div>
+                    <span className="stat-tip">꾸준함의 시작</span>
+                  </div>
+                  <div>
+                    <span className="stat-icon green">
+                      <Layers size={21} />
+                    </span>
+                    <div>
+                      <span>만나본 단어</span>
+                      <strong>
+                        {saved.done.length}
+                        <small>/ {words.length}개</small>
+                      </strong>
+                    </div>
+                    <div className="mini-progress">
+                      <i style={{ width: percentage + '%' }} />
+                    </div>
+                  </div>
+                  <div>
+                    <span className="stat-icon purple">
+                      <RotateCcw size={21} />
+                    </span>
+                    <div>
+                      <span>복습할 단어</span>
+                      <strong>
+                        {saved.wrong.length}
+                        <small>개</small>
+                      </strong>
                     </div>
                     <button
-                      className="sound"
-                      aria-label="오늘의 문장 듣기"
-                      onClick={() => speak('音楽が好きです')}
+                      className="circle-btn"
+                      aria-label="오답 복습 열기"
+                      onClick={() => setTab('오답 복습')}
                     >
-                      <Volume2 size={20} />
+                      <ArrowUpRight size={19} />
                     </button>
                   </div>
-                  <div className="expression-foot">
-                    <span>おんがくが すきです · 좋아하는 마음을 일본어로 말해 봐요.</span>
-                    <Sprout size={22} />
-                  </div>
                 </div>
-                <div className="goal">
-                  <span>
-                    <Sprout size={19} /> 나의 작은 목표
-                  </span>
-                  <h3>
-                    매일 조금씩,
-                    <br />
-                    끝까지 즐겁게.
-                  </h3>
-                  <p>완벽한 하루보다 꾸준한 하루를 쌓아요.</p>
-                  <div>
-                    <span>오늘의 단어 진도</span>
-                    <b>{percentage}%</b>
-                  </div>
-                  <div className="progress">
-                    <i style={{ width: percentage + '%' }} />
-                  </div>
+                <div className="section-title">
+                  <h2>
+                    오늘의 학습 코스 <span>나에게 맞는 작은 루틴</span>
+                  </h2>
+                  <span className="tiny-label">LET'S STUDY</span>
                 </div>
-              </section>
-            </>
-          ) : tab === '음악 공부방' ? (
-            <SongLibrary start={start} speak={speak} done={saved.done} wrong={saved.wrong} />
-          ) : tab === '문법 노트' ? (
-            <div className="grammar-list">
-              {grammar.map((g, i) => (
-                <button className="grammar-card" key={g.title} onClick={() => setDetail(i)}>
-                  <span className="course-tag">GRAMMAR 0{i + 1}</span>
-                  <h2>{g.title}</h2>
-                  <h3>{g.meaning}</h3>
-                  <p>{g.desc}</p>
-                  <span className="text-link">
-                    예문 살펴보기 <ChevronRight size={16} />
-                  </span>
-                </button>
-              ))}
-            </div>
-          ) : (
-            <>
-              <div className="list-toolbar">
-                <span>
-                  {tab === '오답 복습' ? saved.wrong.length : words.length}개의 단어{' '}
-                  <small>학습용 샘플</small>
-                </span>
-                <button
-                  className="primary"
-                  disabled={tab === '오답 복습' && !saved.wrong.length}
-                  onClick={() => start(tab === '오답 복습' ? saved.wrong : allIds)}
-                >
-                  퀴즈 시작 <ArrowRight size={16} />
-                </button>
-              </div>
-              {tab === '오답 복습' && !saved.wrong.length ? (
-                <div className="empty">
-                  <Sprout size={42} />
-                  <h2>아직 복습할 단어가 없어요</h2>
-                  <p>단어 퀴즈에서 틀린 단어가 여기에 모여요.</p>
-                  <button className="primary" onClick={() => start(allIds)}>
-                    단어 퀴즈 풀기
+                <div className="courses">
+                  <button className="course" onClick={() => start(allIds)}>
+                    <span className="course-icon green">
+                      <Layers />
+                    </span>
+                    <span className="course-tag">VOCABULARY</span>
+                    <h3>단어 한 줌</h3>
+                    <p>기초 음악 단어부터 N3 일상 단어까지</p>
+                    <div>
+                      <span>{words.length}개 단어 · 나만의 복습</span>
+                      <ArrowUpRight size={20} />
+                    </div>
+                  </button>
+                  <button className="course" onClick={() => setTab('문법 노트')}>
+                    <span className="course-icon peach">
+                      <BookOpen />
+                    </span>
+                    <span className="course-tag">GRAMMAR</span>
+                    <h3>문법 한 페이지</h3>
+                    <p>예문으로 이해하는 문장의 규칙</p>
+                    <div>
+                      <span>{grammar.length}개 표현 · 약 5분</span>
+                      <ArrowUpRight size={20} />
+                    </div>
+                  </button>
+                  <button className="course" onClick={() => setTab('오답 복습')}>
+                    <span className="course-icon purple">
+                      <RotateCcw />
+                    </span>
+                    <span className="course-tag">REVIEW</span>
+                    <h3>기억 다시 꺼내기</h3>
+                    <p>헷갈렸던 단어를 확실한 내 것으로</p>
+                    <div>
+                      <span>오답 {saved.wrong.length}개 · 나만의 복습</span>
+                      <ArrowUpRight size={20} />
+                    </div>
                   </button>
                 </div>
-              ) : (
-                <div className="word-grid">
-                  {(tab === '오답 복습' ? saved.wrong : allIds).map((id) => (
-                    <article className="word-card" key={id}>
+                <section className="bottom-grid">
+                  <div className="expression">
+                    <div className="section-title">
+                      <h2>음악으로 여는 한 문장</h2>
+                      <span className="tiny-label">DAILY JAPANESE</span>
+                    </div>
+                    <div className="quote-row">
                       <div>
-                        <span className="course-tag">
-                          {id >= SONG_WORD_OFFSET
-                            ? '곡별 N3 코스'
-                            : id >= n3Words.length
-                              ? 'J-POP · 기초'
-                              : 'N3 · 단어'}
-                        </span>
-                        <button
-                          className="sound"
-                          aria-label={`${words[id].word} 발음 듣기`}
-                          onClick={() => speak(words[id].reading)}
-                        >
-                          <Volume2 size={18} />
-                        </button>
+                        <p lang="ja">音楽が好きです。</p>
+                        <span>음악을 좋아해요.</span>
                       </div>
-                      <h2 lang="ja">{words[id].word}</h2>
-                      <span>{words[id].reading}</span>
-                      <h3>{words[id].meaning}</h3>
-                      <p lang="ja">{words[id].example}</p>
-                      <small>{words[id].translation}</small>
-                      {saved.done.includes(id) && (
-                        <span className="learned">
-                          <Check size={13} /> 학습한 단어
-                        </span>
-                      )}
-                    </article>
-                  ))}
+                      <button
+                        className="sound"
+                        aria-label="오늘의 문장 듣기"
+                        onClick={() => speak('音楽が好きです')}
+                      >
+                        <Volume2 size={20} />
+                      </button>
+                    </div>
+                    <div className="expression-foot">
+                      <span>おんがくが すきです · 좋아하는 마음을 일본어로 말해 봐요.</span>
+                      <Sprout size={22} />
+                    </div>
+                  </div>
+                  <div className="goal">
+                    <span>
+                      <Sprout size={19} /> 나의 작은 목표
+                    </span>
+                    <h3>
+                      매일 조금씩,
+                      <br />
+                      끝까지 즐겁게.
+                    </h3>
+                    <p>완벽한 하루보다 꾸준한 하루를 쌓아요.</p>
+                    <div>
+                      <span>오늘의 단어 진도</span>
+                      <b>{percentage}%</b>
+                    </div>
+                    <div className="progress">
+                      <i style={{ width: percentage + '%' }} />
+                    </div>
+                  </div>
+                </section>
+              </>
+            ) : tab === '음악 공부방' ? (
+              <SongLibrary start={start} speak={speak} done={saved.done} wrong={saved.wrong} />
+            ) : tab === '문법 노트' ? (
+              <div className="grammar-list">
+                {grammar.map((g, i) => (
+                  <button className="grammar-card" key={g.title} onClick={() => setDetail(i)}>
+                    <span className="course-tag">GRAMMAR 0{i + 1}</span>
+                    <h2>{g.title}</h2>
+                    <h3>{g.meaning}</h3>
+                    <p>{g.desc}</p>
+                    <span className="text-link">
+                      예문 살펴보기 <ChevronRight size={16} />
+                    </span>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <>
+                <div className="list-toolbar">
+                  <span>
+                    {tab === '오답 복습' ? saved.wrong.length : words.length}개의 단어{' '}
+                    <small>학습용 샘플</small>
+                  </span>
+                  <button
+                    className="primary"
+                    disabled={tab === '오답 복습' && !saved.wrong.length}
+                    onClick={() => start(tab === '오답 복습' ? saved.wrong : allIds)}
+                  >
+                    퀴즈 시작 <ArrowRight size={16} />
+                  </button>
                 </div>
-              )}
-            </>
-          )}
+                {tab === '오답 복습' && !saved.wrong.length ? (
+                  <div className="empty">
+                    <Sprout size={42} />
+                    <h2>아직 복습할 단어가 없어요</h2>
+                    <p>단어 퀴즈에서 틀린 단어가 여기에 모여요.</p>
+                    <button className="primary" onClick={() => start(allIds)}>
+                      단어 퀴즈 풀기
+                    </button>
+                  </div>
+                ) : (
+                  <div className="word-grid">
+                    {(tab === '오답 복습' ? saved.wrong : allIds).map((id) => (
+                      <article className="word-card" key={id}>
+                        <div>
+                          <span className="course-tag">
+                            {id >= SONG_WORD_OFFSET
+                              ? '곡별 N3 코스'
+                              : id >= n3Words.length
+                                ? 'J-POP · 기초'
+                                : 'N3 · 단어'}
+                          </span>
+                          <button
+                            className="sound"
+                            aria-label={`${words[id].word} 발음 듣기`}
+                            onClick={() => speak(words[id].reading)}
+                          >
+                            <Volume2 size={18} />
+                          </button>
+                        </div>
+                        <h2 lang="ja">{words[id].word}</h2>
+                        <span>{words[id].reading}</span>
+                        <h3>{words[id].meaning}</h3>
+                        <p lang="ja">{words[id].example}</p>
+                        <small>{words[id].translation}</small>
+                        {saved.done.includes(id) && (
+                          <span className="learned">
+                            <Check size={13} /> 학습한 단어
+                          </span>
+                        )}
+                      </article>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
           <PwaControls />
           <footer>
             <span className="footer-brand">
@@ -512,7 +518,13 @@ function App() {
       </nav>
       {quiz && (
         <div className="modal-backdrop">
-          <section className="modal" role="dialog" aria-modal="true" aria-label="단어 퀴즈">
+          <section
+            key={finished ? 'result' : step}
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label="단어 퀴즈"
+          >
             <button className="close" aria-label="퀴즈 닫기" onClick={() => setQuiz(null)}>
               <X />
             </button>
