@@ -8,7 +8,9 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "icons:generate": "node scripts/generate-icons.mjs",
+    "prebuild": "npm run icons:generate"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
@@ -16,6 +18,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
     "@tailwindcss/vite": "4.3.3",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
