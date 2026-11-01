@@ -1,0 +1,39 @@
+# Dependencies and build output
+node_modules/
+dist/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+
+# Environment variables: commit sanitized examples only
+.env
+.env.*
+!.env.example
+!.env.sample
+*.local
+
+# Credentials and private keys
+.aws/
+.ssh/
+.secrets/
+secrets/
+credentials.json
+credentials-*.json
+service-account*.json
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+
+# Local assistant state and personal learning notes
+.codex/
+/docs/learning-context.md
+
+# Editor, system, and log files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
