@@ -1,0 +1,28 @@
+# Generated files and dependencies
+node_modules/
+dist/
+.next/
+out/
+coverage/
+package-lock.json
+*.tsbuildinfo
+
+# Hosting metadata and local/private files
+.openai/
+.git/
+.codex/
+.aws/
+.ssh/
+.secrets/
+secrets/
+.env
+.env.*
+*.local
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+credentials*.json
+service-account*.json
+docs/learning-context.md

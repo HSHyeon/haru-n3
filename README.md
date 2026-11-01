@@ -1,4 +1,5 @@
 # 하루 · N3 공부
+
 React + TypeScript + Vite로 만든 개인용 일본어 학습 초안입니다.
 
 ## 실행
@@ -36,6 +37,18 @@ N3 일상 단어 6개, 음악 주제 기초 단어 6개, 문법 3개의 샘플�
 새 단어는 기존 12개 뒤에 추가하여 기존 학습 기록을 유지합니다. 단어 오답은 공통 오답장에, 문법 오답은 음악 공부방의 곡별 문법 오답에 표시합니다. 학습 진도·문법 답안·곡별 메모는 현재 브라우저에만 저장됩니다. 공식 영상은 사용자가 누르면 YouTube에서 불러오며 네트워크 연결이 필요합니다. 앱 내 재생 제한 시 공식 영상 링크를 이용하세요.
 
 공식 출처:
+
 - https://yorushika.com/news/detail/11091
 - https://yorushika.com/news/detail/11103
 - https://yorushika.com/news/detail/11214
+
+## 코드 정리
+
+Prettier로 TypeScript·React·CSS·JSON·Markdown 형식을 통일합니다.
+
+```sh
+npm run format        # 자동 정리
+npm run format:check  # 정리가 필요한 파일 확인
+```
+
+VS Code에서 저장할 때 자동 정리하려면 Prettier 확장을 설치하고 기본 포맷터를 Prettier로 지정한 뒤 `Format On Save`를 켜세요. 저장소에는 개인 편집기 설정을 포함하지 않습니다. 설정은 `.prettierrc.json`, 제외 대상은 `.prettierignore`에 있습니다. 빌드 결과와 인증 파일, 개인 학습 메모는 포맷 대상에서도 제외합니다.
