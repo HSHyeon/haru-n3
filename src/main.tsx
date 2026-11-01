@@ -17,7 +17,6 @@ import {
   Music2,
 } from 'lucide-react';
 import './style.css';
-import './theme.css';
 import { PwaControls } from './pwa';
 import { musicWords, RecordArt } from './music';
 import { SongLibrary, songWords, SONG_WORD_OFFSET } from './songs';
@@ -154,9 +153,7 @@ function App() {
     <div className="shell bg-night text-ink antialiased">
       <aside>
         <a className="logo" href="#" onClick={() => setTab('홈')}>
-          <span className="logo-icon" lang="ja">
-            音
-          </span>
+          <img className="logo-icon" src="/favicon.svg" alt="" aria-hidden="true" />
           <span className="logo-wordmark">
             OTOBA<small lang="ja">音葉</small>
           </span>
@@ -203,6 +200,7 @@ function App() {
       <main>
         <header>
           <span className="header-brand">
+            <img className="header-logo" src="/favicon.svg" alt="" aria-hidden="true" />
             OTOBA <small lang="ja">音葉</small>
           </span>
           <div>

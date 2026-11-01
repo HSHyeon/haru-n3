@@ -57,7 +57,7 @@ VS Code에서 저장할 때 자동 정리하려면 Prettier 확장을 설치하�
 
 ## 다크 테마와 모션
 
-Tailwind CSS의 Vite 플러그인을 사용합니다. 공통 색상과 모션 토큰은 `src/style.css`의 `@theme`, 다크 컴포넌트 표현은 `src/theme.css`에 있습니다. 기존 레이아웃은 components 레이어에 유지하고 유틸리티가 필요한 부분을 덮어쓸 수 있게 구성했습니다. Tailwind Preflight는 적용하지 않습니다.
+Tailwind CSS의 Vite 플러그인을 사용합니다. 공통 색상과 모션 토큰은 `src/style.css`의 `@theme`에 있으며, 레이아웃과 다크 컴포넌트 스타일은 같은 파일의 components 레이어에 모았습니다. 중복 테마 선언과 사용하지 않는 예전 장식 스타일은 제거했습니다. 기존 레이아웃은 components 레이어에 유지하고 유틸리티가 필요한 부분을 덮어쓸 수 있게 구성했습니다. Tailwind Preflight는 적용하지 않습니다.
 
 기본 배경은 짙은 남색이고, 본문·보조 글자·버튼·정답·오답 상태를 구분했습니다. 페이지 진입과 학습 단계 전환, 모달·해설에는 짧은 모션을 적용합니다. `prefers-reduced-motion`에서는 애니메이션·전환을 끕니다.
 
