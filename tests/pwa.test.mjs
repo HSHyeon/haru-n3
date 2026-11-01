@@ -32,3 +32,8 @@ test('a complete app downloads before activation',async()=>{const w=worker();awa
 test('offline home opens the saved application',async()=>{const w=worker({offline:true});await w.cache.put('/index.html',new Response('saved app'));assert.equal(await(await w.request('/')).text(),'saved app');});
 test('online access denial is not replaced by an offline page',async()=>{const w=worker({navigationLogin:true});await w.cache.put('/index.html',new Response('saved app'));assert.equal((await w.request('/')).status,403);});
 test('auth routes, callbacks and external requests are not intercepted',()=>{const w=worker();assert.equal(w.request('/signin-with-chatgpt'),undefined);assert.equal(w.request('/?code=private'),undefined);assert.equal(w.request('/api/session'),undefined);});
+
+test('private manifest requests include the login credentials',()=>{
+ const html=readFileSync('dist/index.html','utf8');
+ assert.match(html,/<link[^>]*rel="manifest"[^>]*crossorigin="use-credentials"/);
+});
