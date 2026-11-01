@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>하루 · 달빛과 음악</title>
+  <rect width="64" height="64" rx="14" fill="#243b5b"/>
+  <path d="M35 14a18 18 0 1 0 9 32A17 17 0 0 1 35 14Z" fill="#e9e5d4"/>
+  <g fill="#b1c5d3"><ellipse cx="45" cy="44" rx="5" ry="3.6" transform="rotate(-17 45 44)"/><path d="M48 24h3v20h-3zM49 24h8v4h-8z"/></g>
+  <path d="m48 10 1.3 3.7L53 15l-3.7 1.3L48 20l-1.3-3.7L43 15l3.7-1.3Z" fill="#beab81"/>
+</svg>

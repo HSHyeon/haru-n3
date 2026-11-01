@@ -1,6 +1,6 @@
 """Generate Haru's original moon-and-note icons using only the standard library."""
 from pathlib import Path
-import math, struct, zlib
+import struct, zlib
 root = Path(__file__).resolve().parent.parent / 'public' / 'icons'
 root.mkdir(exist_ok=True)
 
@@ -21,3 +21,14 @@ def icon(n, filename):
     (root/filename).write_bytes(png)
 for n,name in [(192,'icon-192.png'),(512,'icon-512.png'),(512,'icon-maskable-512.png'),(180,'apple-touch-icon.png')]:
     icon(n,name)
+
+# Traditional multi-resolution favicon for browser tabs and bookmarks.
+for n in [16,32]:
+    icon(n, f'favicon-{n}.png')
+images=[(n,(root/f'favicon-{n}.png').read_bytes()) for n in [16,32]]
+offset=6+16*len(images)
+entries=[]
+for n,data in images:
+    entries.append(struct.pack('<BBBBHHII',n,n,0,0,1,32,len(data),offset))
+    offset+=len(data)
+(root.parent/'favicon.ico').write_bytes(struct.pack('<HHH',0,1,len(images))+b''.join(entries)+b''.join(data for _,data in images))
