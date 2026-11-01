@@ -26,3 +26,5 @@ secrets/
 credentials*.json
 service-account*.json
 docs/learning-context.md
+
+ai-drafts/

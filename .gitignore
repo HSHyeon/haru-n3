@@ -37,3 +37,9 @@ Thumbs.db
 .idea/
 .vscode/
 *.log
+
+# Private AI drafts and Python cache
+/ai-drafts/
+__pycache__/
+*.pyc
+.venv/

@@ -73,3 +73,32 @@ Tailwind CSS의 Vite 플러그인을 사용합니다. 공통 색상과 모션 �
 npm run icons:generate # 아이콘만 재생성
 npm run build          # 아이콘 재생성 → 타입 검사 → 앱 빌드
 ```
+
+## AI 학습 자료 생성 (Python)
+
+`Python 3.10+` 표준 라이브러리만 사용합니다. `scripts/generate-lessons.py`가 OpenAI Responses API의 Structured Outputs로 기존 단어·문법 형식에 맞는 JSON 초안을 생성합니다. 현재 웹앱에 실시간 AI 선생님이 연결된 것은 아닙니다.
+
+- 기본 분량: 단어 20개 + 문법·퀴즈 4개. `--words` (1–40), `--grammar` (1–8)로 조절합니다.
+- `--course sunny`, `flower`, `spring` 중 기존 곡 ID를 선택합니다. 곡 제목과 주제만 전송하며 가사나 개인 학습 기록을 수집·전송하지 않습니다.
+- 예문은 창작이며 실제 가사에 등장하는 표현 또는 공식 JLPT 출제 목록이라고 보장하지 않습니다.
+- `ai-drafts/`는 Git 및 웹 빌드에서 제외됩니다. 생성 결과는 검토 대기 상태로 저장하고 기존 학습 데이터에 자동 반영하지 않습니다. 단어 순서를 바꾸면 기존 학습 기록의 인덱스가 달라질 수 있으므로 검토 후 별도로 통합해야 합니다.
+
+먼저 API 호출 없이 요청 내용을 확인할 수 있습니다. `YOUR_MODEL_ID`는 Structured Outputs를 지원하는 사용 가능한 모델 ID로 바꿉니다.
+
+```sh
+python3 scripts/generate-lessons.py --course sunny --model YOUR_MODEL_ID --dry-run
+```
+
+실제 생성은 로컬 셸에 `OPENAI_API_KEY`와 `OPENAI_MODEL` 환경 변수를 안전하게 설정한 뒤 실행합니다. 키를 코드, `VITE_*`, 명령행 인자, Git에 넣지 마세요. `.env.example`은 변수 이름 안내이며 스크립트는 프로젝트의 Git에서 제외된 `.env.local`만 읽습니다. 셸에서 설정한 값이 우선하며 `.env`는 읽지 않습니다. API 호출에는 계정의 사용 요금이 발생할 수 있습니다. 요청을 자동 재시도하지 않습니다.
+
+```sh
+python3 scripts/generate-lessons.py --course sunny --words 20 --grammar 4
+python3 scripts/generate-lessons.py --validate ai-drafts/sunny-draft.json
+python3 -m unittest discover -s tests -p 'test_*.py'
+```
+
+같은 파일을 덮어쓰지 않습니다. 새 생성은 `--output ai-drafts/sunny-draft-2.json`처럼 이름을 지정하세요. 검증은 필드 형식·문항 수·선택지 중복·정답 범위를 검사합니다. 일본어 정확성, 번역 및 난이도는 사람이 확인해야 합니다. API 응답이 중단되거나 거절되면 초안을 저장하지 않습니다. 키를 포함한 요청 헤더와 API 오류 본문은 출력하지 않습니다.
+
+다음 단계인 웹앱 내 AI 질문 기능에는 인증된 서버 API와 서버 비밀 키 설정이 필요합니다. 이 생성 도구는 브라우저에 API 키를 전달하지 않습니다.
+
+공식 API 문서: [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs).
