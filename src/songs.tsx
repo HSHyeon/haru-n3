@@ -109,13 +109,15 @@ export function SongLibrary({
               <p>
                 내가 좋아하는 음악에서 시작하는 N3 공부.
                 <br />
-                3곡의 테마를 따라 단어와 문법을 차곡차곡 익혀요.
+                {courses.length}곡의 테마를 따라 단어와 문법을 차곡차곡 익혀요.
               </p>
               <div className="collection-meta">
-                <span>3 TRACKS</span>
-                <span>단어 12개</span>
-                <span>문법 6개</span>
-                <span>{courses.filter((_, i) => completed(i)).length} / 3 코스 완료</span>
+                <span>{courses.length} TRACKS</span>
+                <span>단어 {songWords.length}개</span>
+                <span>문법 {courses.reduce((n, course) => n + course.grammar.length, 0)}개</span>
+                <span>
+                  {courses.filter((_, i) => completed(i)).length} / {courses.length} 코스 완료
+                </span>
               </div>
             </div>
             <div className="collection-art" aria-hidden="true">

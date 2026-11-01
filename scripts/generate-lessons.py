@@ -174,7 +174,7 @@ def main(argv=None):
     parser.add_argument("--course", default="sunny", help="Existing course ID (default: sunny)")
     parser.add_argument("--words", type=int, default=20)
     parser.add_argument("--grammar", type=int, default=4)
-    parser.add_argument("--model", default=os.environ.get("OPENAI_MODEL"))
+    parser.add_argument("--model", default=os.environ.get("OPENAI_MODEL") or "gpt-6-luna")
     parser.add_argument("--dry-run", action="store_true", help="Save request only; no API call or charge")
     parser.add_argument("--validate", type=Path, metavar="DRAFT", help="Validate a saved draft offline")
     parser.add_argument("--output", type=Path, help="New JSON path under ai-drafts/")

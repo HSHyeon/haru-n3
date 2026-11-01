@@ -98,9 +98,18 @@ const grammar = [
 type Saved = { done: number[]; wrong: number[]; dates: string[] };
 function read(): Saved {
   try {
-    return (
-      JSON.parse(localStorage.getItem('haru-n3') || 'null') || { done: [], wrong: [], dates: [] }
-    );
+    const raw = JSON.parse(localStorage.getItem('haru-n3') || 'null');
+    const activeIds = (value: unknown): number[] =>
+      Array.isArray(value)
+        ? [...new Set(value.filter((id) => Number.isInteger(id) && id >= 0 && id < words.length))]
+        : [];
+    return {
+      done: activeIds(raw?.done),
+      wrong: activeIds(raw?.wrong),
+      dates: Array.isArray(raw?.dates)
+        ? raw.dates.filter((date: unknown) => typeof date === 'string')
+        : [],
+    };
   } catch {
     return { done: [], wrong: [], dates: [] };
   }
@@ -259,13 +268,13 @@ function App() {
                     <p>
                       요루시카를 듣는 밤, 일본어를 배우는 나.
                       <br />
-                      좋아하는 3곡으로 N3 단어와 문법을 익혀요.
+                      좋아하는 2곡으로 N3 단어와 문법을 익혀요.
                     </p>
                     <button className="primary" onClick={() => setTab('음악 공부방')}>
                       음악 공부방 들어가기 <ArrowRight size={18} />
                     </button>
                     <div className="hero-meta">
-                      요루시카 3곡 <span>·</span> 단어 12개 · 문법 6개
+                      요루시카 2곡 <span>·</span> 단어 8개 · 문법 4개
                     </div>
                   </div>
                   <RecordArt />
