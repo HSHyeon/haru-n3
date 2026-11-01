@@ -1916,7 +1916,7 @@
       38px 10px 0 #e7dfed1c,
       -20px -30px 0 #e7dfed18;
   }
-  .spring .cover-shape {
+  .daylight .cover-shape {
     width: 140px;
     height: 65px;
     right: -10px;
@@ -2934,8 +2934,8 @@
   .flower {
     background: linear-gradient(145deg, #655d7c, #302e4a);
   }
-  .spring {
-    background: linear-gradient(145deg, #4b7066, #243c38);
+  .daylight {
+    background: linear-gradient(145deg, #745232, #332c30);
   }
   .song-cover {
     color: #f5f7fc;

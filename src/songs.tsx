@@ -14,12 +14,14 @@ import courses from './data/song-courses.json';
 import { MusicRoom } from './music';
 export const songCourses = courses;
 export const songWords = courses.flatMap((course) => course.words);
-// IDs 0–11 are existing vocabulary. Append new words to preserve old records.
+// IDs 0–11 are foundation words; 20–23 remain retired for the removed course.
 export const SONG_WORD_OFFSET = 12;
 export function courseWordIds(index: number) {
-  const before = courses.slice(0, index).reduce((n, course) => n + course.words.length, 0);
-  return courses[index].words.map((_, i) => SONG_WORD_OFFSET + before + i);
+  return courses[index].words.map((_, i) => courses[index].wordOffset + i);
 }
+export const songWordEntries = courses.flatMap((course, index) =>
+  course.words.map((word, i) => [courseWordIds(index)[i], word] as const),
+);
 type Course = (typeof courses)[number];
 type Answers = Record<string, number>;
 function readAnswers(): Answers {

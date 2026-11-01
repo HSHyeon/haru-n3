@@ -19,7 +19,7 @@ import {
 import './style.css';
 import { PwaControls } from './pwa';
 import { musicWords, RecordArt } from './music';
-import { SongLibrary, songWords, SONG_WORD_OFFSET } from './songs';
+import { SongLibrary, songWords, songWordEntries, songCourses, SONG_WORD_OFFSET } from './songs';
 const n3Words = [
   {
     word: '支度',
@@ -70,8 +70,11 @@ const n3Words = [
     choices: ['잊어버리다', '확인하다', '비교하다', '설명하다'],
   },
 ];
-const words = [...n3Words, ...musicWords, ...songWords];
-const allIds = words.map((_, i) => i);
+const words = Object.fromEntries([
+  ...[...n3Words, ...musicWords].map((word, id) => [id, word] as const),
+  ...songWordEntries,
+]);
+const allIds = Object.keys(words).map(Number);
 const grammar = [
   {
     title: '〜ようにする',
@@ -101,7 +104,7 @@ function read(): Saved {
     const raw = JSON.parse(localStorage.getItem('haru-n3') || 'null');
     const activeIds = (value: unknown): number[] =>
       Array.isArray(value)
-        ? [...new Set(value.filter((id) => Number.isInteger(id) && id >= 0 && id < words.length))]
+        ? [...new Set(value.filter((id) => Number.isInteger(id) && id >= 0 && id in words))]
         : [];
     return {
       done: activeIds(raw?.done),
@@ -157,7 +160,7 @@ function App() {
       speechSynthesis.speak(u);
     }
   };
-  const percentage = Math.round((saved.done.length / words.length) * 100);
+  const percentage = Math.round((saved.done.length / allIds.length) * 100);
   return (
     <div className="shell bg-night text-ink antialiased">
       <aside>
@@ -268,13 +271,14 @@ function App() {
                     <p>
                       요루시카를 듣는 밤, 일본어를 배우는 나.
                       <br />
-                      좋아하는 2곡으로 N3 단어와 문법을 익혀요.
+                      좋아하는 {songCourses.length}곡으로 N3 단어와 문법을 익혀요.
                     </p>
                     <button className="primary" onClick={() => setTab('음악 공부방')}>
                       음악 공부방 들어가기 <ArrowRight size={18} />
                     </button>
                     <div className="hero-meta">
-                      요루시카 2곡 <span>·</span> 단어 8개 · 문법 4개
+                      요루시카 {songCourses.length}곡 <span>·</span> 단어 {songWords.length}개 ·
+                      문법 {songCourses.reduce((n, course) => n + course.grammar.length, 0)}개
                     </div>
                   </div>
                   <RecordArt />
@@ -314,7 +318,7 @@ function App() {
                       <span>만나본 단어</span>
                       <strong>
                         {saved.done.length}
-                        <small>/ {words.length}개</small>
+                        <small>/ {allIds.length}개</small>
                       </strong>
                     </div>
                     <div className="mini-progress">
@@ -356,7 +360,7 @@ function App() {
                     <h3>단어 한 줌</h3>
                     <p>기초 음악 단어부터 N3 일상 단어까지</p>
                     <div>
-                      <span>{words.length}개 단어 · 나만의 복습</span>
+                      <span>{allIds.length}개 단어 · 나만의 복습</span>
                       <ArrowUpRight size={20} />
                     </div>
                   </button>
@@ -449,7 +453,7 @@ function App() {
               <>
                 <div className="list-toolbar">
                   <span>
-                    {tab === '오답 복습' ? saved.wrong.length : words.length}개의 단어{' '}
+                    {tab === '오답 복습' ? saved.wrong.length : allIds.length}개의 단어{' '}
                     <small>학습용 샘플</small>
                   </span>
                   <button
