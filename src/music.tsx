@@ -65,7 +65,7 @@ export function RecordArt() {
       <span className="star star-one">✧</span>
       <span className="star star-two">✦</span>
       <div className="record-sleeve">
-        <span>HARU RECORDS</span>
+        <span>OTOBA RECORDS</span>
         <div className="sleeve-window">
           <div className="sleeve-moon" />
           <div className="sleeve-hill" />
@@ -75,7 +75,7 @@ export function RecordArt() {
       </div>
       <div className="vinyl">
         <div>
-          は<span>33 RPM</span>
+          音<span>33 RPM</span>
         </div>
       </div>
       <div className="record-caption">a little japanese, a little music.</div>

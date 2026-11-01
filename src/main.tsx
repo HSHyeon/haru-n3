@@ -154,7 +154,12 @@ function App() {
     <div className="shell bg-night text-ink antialiased">
       <aside>
         <a className="logo" href="#" onClick={() => setTab('홈')}>
-          <span className="logo-icon">は</span> 하루<span className="logo-dot">.</span>
+          <span className="logo-icon" lang="ja">
+            音
+          </span>
+          <span className="logo-wordmark">
+            OTOBA<small lang="ja">音葉</small>
+          </span>
         </a>
         <div className="workspace-label">MY LITTLE LISTENING ROOM</div>
         <nav>
@@ -197,7 +202,9 @@ function App() {
       </aside>
       <main>
         <header>
-          <span>나만의 일본어 공부, 하루</span>
+          <span className="header-brand">
+            OTOBA <small lang="ja">音葉</small>
+          </span>
           <div>
             <span className="level">JLPT N3</span>
             <span className="avatar">나</span>
@@ -207,10 +214,10 @@ function App() {
           <div key={tab} className="page-view motion-safe:animate-page-enter">
             <div className="greeting">
               <div>
-                <div className="eyebrow">JAPANESE, ON REPEAT</div>
+                <div className="eyebrow">OTOBA · 音葉 / JAPANESE, IN BLOOM</div>
                 <h1>
                   {tab === '홈'
-                    ? '좋아하는 마음으로, 한 걸음'
+                    ? '좋아하는 노래가, 나의 언어로'
                     : tab === '단어장'
                       ? '차곡차곡, 나의 단어'
                       : tab === '문법 노트'
@@ -222,7 +229,7 @@ function App() {
                 </h1>
                 <p>
                   {tab === '홈'
-                    ? '좋아하는 J-pop이 조금 더 들리는 순간을 위해, 오늘도 10분.'
+                    ? '좋아하는 J-POP으로 배우는 나만의 일본어'
                     : tab === '단어장'
                       ? '읽고, 듣고, 퀴즈로 기억해 보세요.'
                       : tab === '문법 노트'
@@ -495,9 +502,9 @@ function App() {
           <PwaControls />
           <footer>
             <span className="footer-brand">
-              하루<span>.</span>
+              OTOBA <span lang="ja">音葉</span>
             </span>
-            <span>좋아하는 마음으로, 매일 조금씩.</span>
+            <span>좋아하는 J-POP으로 배우는 나만의 일본어</span>
             <small>기초부터 N3까지 · 기록은 현재 브라우저에 저장돼요</small>
           </footer>
         </div>

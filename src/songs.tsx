@@ -122,7 +122,7 @@ export function SongLibrary({
               <div />
               <i />
               <span>
-                は<br />
+                音<br />
                 <small>SIDE N3</small>
               </span>
             </div>

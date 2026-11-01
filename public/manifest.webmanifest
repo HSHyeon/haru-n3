@@ -1,8 +1,8 @@
 {
   "id": "/",
-  "name": "하루 · 나의 일본어 공부",
-  "short_name": "하루",
-  "description": "J-pop과 함께, 나의 속도로 배우는 일본어. 기초부터 JLPT N3까지.",
+  "name": "OTOBA · 音葉",
+  "short_name": "OTOBA",
+  "description": "좋아하는 J-POP으로 배우는 나만의 일본어",
   "lang": "ko",
   "start_url": "/",
   "scope": "/",
@@ -10,8 +10,18 @@
   "background_color": "#0a101b",
   "theme_color": "#0a101b",
   "icons": [
-    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/icons/icon-maskable-512.png",
       "sizes": "512x512",

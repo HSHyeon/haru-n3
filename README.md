@@ -1,4 +1,6 @@
-# 하루 · N3 공부
+# OTOBA (音葉)
+
+좋아하는 J-POP으로 배우는 나만의 일본어
 
 React + TypeScript + Vite로 만든 개인용 일본어 학습 초안입니다.
 
@@ -58,3 +60,7 @@ VS Code에서 저장할 때 자동 정리하려면 Prettier 확장을 설치하�
 Tailwind CSS의 Vite 플러그인을 사용합니다. 공통 색상과 모션 토큰은 `src/style.css`의 `@theme`, 다크 컴포넌트 표현은 `src/theme.css`에 있습니다. 기존 레이아웃은 components 레이어에 유지하고 유틸리티가 필요한 부분을 덮어쓸 수 있게 구성했습니다. Tailwind Preflight는 적용하지 않습니다.
 
 기본 배경은 짙은 남색이고, 본문·보조 글자·버튼·정답·오답 상태를 구분했습니다. 페이지 진입과 학습 단계 전환, 모달·해설에는 짧은 모션을 적용합니다. `prefers-reduced-motion`에서는 애니메이션·전환을 끕니다.
+
+## 브랜드와 기존 기록
+
+표시 이름은 OTOBA (音葉)입니다. 기존 설치 앱의 동일성을 유지하기 위해 manifest의 id·scope·start_url은 그대로 두었습니다. 학습 기록을 유지하도록 기존 localStorage 키와 오프라인 캐시 접두어, 앱 식별 메타 태그도 유지합니다. GitHub 저장소명과 배포 주소는 변경하지 않았습니다.

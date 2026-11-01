@@ -665,3 +665,71 @@
     }
   }
 }
+
+@layer components {
+  .logo {
+    gap: 11px;
+    letter-spacing: 0;
+  }
+  .logo-wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
+  .logo-wordmark small {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 5px;
+    color: #c2d2e8;
+  }
+  .header-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: #f1f5fc;
+  }
+  .header-brand small {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: #b4c2d7;
+  }
+  .footer-brand {
+    font-size: 17px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+  .footer-brand > span {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-left: 4px;
+  }
+  @media (max-width: 760px) {
+    .header-brand {
+      font-size: 14px;
+    }
+    .greeting .eyebrow {
+      font-size: 7px;
+      letter-spacing: 1.5px;
+    }
+    .greeting h1 {
+      font-size: 22px;
+    }
+    footer {
+      gap: 10px;
+    }
+    footer > span:not(.footer-brand) {
+      font-size: 8px;
+    }
+  }
+}

@@ -148,7 +148,7 @@ export function PwaControls() {
           <Smartphone size={23} />
         </div>
         <div className="pwa-copy">
-          <h2>{installed ? '내 손안의 작은 공부방' : '하루를 홈 화면에 담아 보세요'}</h2>
+          <h2>{installed ? '내 손안의 작은 공부방' : 'OTOBA를 홈 화면에 담아 보세요'}</h2>
           <p>
             {installed
               ? '오늘도, 좋아하는 마음으로 한 걸음.'
@@ -215,7 +215,7 @@ export function PwaControls() {
       {waiting && (
         <div className="pwa-update" role="status">
           <div>
-            <b>새로운 하루가 준비됐어요</b>
+            <b>OTOBA 업데이트가 준비됐어요</b>
             <span>퀴즈와 메모를 마친 뒤 업데이트해 주세요. 화면이 새로고침돼요.</span>
           </div>
           <button className="pwa-action" disabled={updating} onClick={updateApp}>

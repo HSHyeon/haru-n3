@@ -72,7 +72,7 @@ self.addEventListener('fetch', (event) => {
           const cached = await (await caches.open(CACHE_NAME)).match('/index.html');
           return (
             cached ||
-            new Response('오프라인 준비가 필요해요. 인터넷에 연결한 뒤 하루를 다시 열어 주세요.', {
+            new Response('오프라인 준비가 필요해요. 인터넷에 연결한 뒤 OTOBA를 다시 열어 주세요.', {
               status: 503,
               headers: { 'Content-Type': 'text/plain; charset=utf-8' },
             })
