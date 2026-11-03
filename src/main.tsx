@@ -119,8 +119,10 @@ function read(): Saved {
     return { done: [], wrong: [], dates: [] };
   }
 }
+const studyTabs = ['가나 연습', '단어장', '문법 노트'];
 function App() {
   const [tab, setTab] = useState('홈');
+  const [lastStudyTab, setLastStudyTab] = useState('가나 연습');
   const [saved, setSaved] = useState<Saved>(read);
   const [quiz, setQuiz] = useState<number[] | null>(null);
   const [step, setStep] = useState(0);
@@ -130,6 +132,7 @@ function App() {
   const [detail, setDetail] = useState<number | null>(null);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+    if (studyTabs.includes(tab)) setLastStudyTab(tab);
   }, [tab]);
   const today = new Date().toLocaleDateString('sv-SE');
   const update = (next: Saved) => {
@@ -264,6 +267,19 @@ function App() {
                 })}
               </span>
             </div>
+            {studyTabs.includes(tab) && (
+              <nav className="study-tabs" aria-label="학습 종류">
+                {studyTabs.map((name) => (
+                  <button
+                    key={name}
+                    aria-current={tab === name ? 'page' : undefined}
+                    onClick={() => setTab(name)}
+                  >
+                    {name === '가나 연습' ? '가나' : name === '단어장' ? '단어' : '문법'}
+                  </button>
+                ))}
+              </nav>
+            )}
             {tab === '홈' ? (
               <>
                 <section className="hero music-hero">
@@ -539,18 +555,21 @@ function App() {
           </footer>
         </div>
       </main>
-      <nav className="mobile-nav">
+      <nav className="mobile-nav" aria-label="하단 메뉴">
         {[
-          { name: '홈', icon: House },
-          { name: '가나 연습', icon: Languages },
-          { name: '단어장', icon: Layers },
-          { name: '음악 공부방', icon: Music2 },
-          { name: '문법 노트', icon: BookOpen },
-          { name: '오답 복습', icon: RotateCcw },
-        ].map(({ name, icon: Icon }) => (
-          <button className={tab === name ? 'active' : ''} onClick={() => setTab(name)} key={name}>
-            <Icon size={21} />
-            <span>{name}</span>
+          { label: '홈', target: '홈', icon: House, active: tab === '홈' },
+          { label: '학습', target: lastStudyTab, icon: BookOpen, active: studyTabs.includes(tab) },
+          { label: '음악', target: '음악 공부방', icon: Music2, active: tab === '음악 공부방' },
+          { label: '복습', target: '오답 복습', icon: RotateCcw, active: tab === '오답 복습' },
+        ].map(({ label, target, icon: Icon, active }) => (
+          <button
+            className={active ? 'active' : ''}
+            aria-current={active ? 'page' : undefined}
+            onClick={() => setTab(target)}
+            key={label}
+          >
+            <Icon size={20} strokeWidth={1.6} />
+            <span>{label}</span>
           </button>
         ))}
       </nav>
