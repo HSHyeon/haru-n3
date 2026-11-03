@@ -139,7 +139,7 @@ export function SongLibrary({
             {courses.map((course, index) => (
               <button className="song-card" key={course.id} onClick={() => select(index)}>
                 <div className={`song-cover ${course.color}`} aria-hidden="true">
-                  <span>0{index + 1} / YORUSHIKA</span>
+                  <span>{String(index + 1).padStart(2, '0')} / YORUSHIKA</span>
                   <div className="cover-shape" />
                   <b>{course.title}</b>
                   <small>ORIGINAL STUDY ART</small>
@@ -301,7 +301,7 @@ function SongDetail({
       </button>
       <section className={`song-detail-heading ${course.color}`}>
         <span className="eyebrow">
-          TRACK 0{index + 1} / {course.season}
+          TRACK {String(index + 1).padStart(2, '0')} / {course.season}
         </span>
         <h2 lang="ja">{course.title}</h2>
         <span className="song-title-reading">
@@ -372,6 +372,7 @@ function SongDetail({
                 아티스트 공식 출처 <ExternalLink size={13} />
               </a>
             </div>
+            {course.videoNote && <p className="video-hint">{course.videoNote}</p>}
             <p className="video-hint">
               영상은 눌렀을 때 YouTube에서 불러옵니다. 인터넷 연결이 필요하며, 앱 내 재생이 제한되면
               YouTube에서 열어 주세요.
