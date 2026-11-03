@@ -15,9 +15,11 @@ import {
   X,
   Volume2,
   Music2,
+  Languages,
 } from 'lucide-react';
 import './style.css';
 import { PwaControls } from './pwa';
+import { KanaStudy } from './kana';
 import { musicWords, RecordArt } from './music';
 import { SongLibrary, songWords, songWordEntries, songCourses, SONG_WORD_OFFSET } from './songs';
 const n3Words = [
@@ -174,6 +176,7 @@ function App() {
         <nav>
           {[
             { name: '홈', icon: House },
+            { name: '가나 연습', icon: Languages },
             { name: '단어장', icon: Layers },
             { name: '음악 공부방', icon: Music2 },
             { name: '문법 노트', icon: BookOpen },
@@ -228,25 +231,29 @@ function App() {
                 <h1>
                   {tab === '홈'
                     ? '좋아하는 노래가, 나의 언어로'
-                    : tab === '단어장'
-                      ? '차곡차곡, 나의 단어'
-                      : tab === '문법 노트'
-                        ? '문장이 보이는 문법'
-                        : tab === '음악 공부방'
-                          ? '나의 작은 음악 공부방'
-                          : '다시 만나면, 내 것이 돼요'}
+                    : tab === '가나 연습'
+                      ? '처음 만나는 일본어의 소리'
+                      : tab === '단어장'
+                        ? '차곡차곡, 나의 단어'
+                        : tab === '문법 노트'
+                          ? '문장이 보이는 문법'
+                          : tab === '음악 공부방'
+                            ? '나의 작은 음악 공부방'
+                            : '다시 만나면, 내 것이 돼요'}
                   <span className="sun">☾</span>
                 </h1>
                 <p>
                   {tab === '홈'
                     ? '좋아하는 J-POP으로 배우는 나만의 일본어'
-                    : tab === '단어장'
-                      ? '읽고, 듣고, 퀴즈로 기억해 보세요.'
-                      : tab === '문법 노트'
-                        ? '예문과 함께 N3 문법의 쓰임을 익혀 보세요.'
-                        : tab === '음악 공부방'
-                          ? '좋아하는 곡을 고르고, N3 표현을 하나씩 익혀 보세요.'
-                          : '틀려도 괜찮아요. 한 번 더 기억할 기회니까요.'}
+                    : tab === '가나 연습'
+                      ? '히라가나와 가타카나, 소리부터 차근차근 익혀요.'
+                      : tab === '단어장'
+                        ? '읽고, 듣고, 퀴즈로 기억해 보세요.'
+                        : tab === '문법 노트'
+                          ? '예문과 함께 N3 문법의 쓰임을 익혀 보세요.'
+                          : tab === '음악 공부방'
+                            ? '좋아하는 곡을 고르고, N3 표현을 하나씩 익혀 보세요.'
+                            : '틀려도 괜찮아요. 한 번 더 기억할 기회니까요.'}
                 </p>
               </div>
               <span className="date">
@@ -293,6 +300,16 @@ function App() {
                   <span>
                     <b>오늘의 N3 공부도, 차근차근.</b>
                     <small>일상 단어 {n3Words.length}개로 시험 공부 이어가기</small>
+                  </span>
+                  <ArrowRight size={18} />
+                </button>
+                <button className="listening-banner" onClick={() => setTab('가나 연습')}>
+                  <span className="listening-banner-icon">
+                    <Languages size={20} />
+                  </span>
+                  <span>
+                    <b>あ・ア부터, 읽는 힘을 차곡차곡.</b>
+                    <small>히라가나·가타카나 문자표와 기억 퀴즈</small>
                   </span>
                   <ArrowRight size={18} />
                 </button>
@@ -433,6 +450,8 @@ function App() {
                   </div>
                 </section>
               </>
+            ) : tab === '가나 연습' ? (
+              <KanaStudy speak={speak} />
             ) : tab === '음악 공부방' ? (
               <SongLibrary start={start} speak={speak} done={saved.done} wrong={saved.wrong} />
             ) : tab === '문법 노트' ? (
@@ -523,6 +542,7 @@ function App() {
       <nav className="mobile-nav">
         {[
           { name: '홈', icon: House },
+          { name: '가나 연습', icon: Languages },
           { name: '단어장', icon: Layers },
           { name: '음악 공부방', icon: Music2 },
           { name: '문법 노트', icon: BookOpen },

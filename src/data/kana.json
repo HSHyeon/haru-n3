@@ -1,0 +1,834 @@
+[
+  {
+    "id": "a-あ",
+    "group": "basic",
+    "hiragana": "あ",
+    "katakana": "ア",
+    "sound": "a",
+    "korean": "아"
+  },
+  {
+    "id": "i-い",
+    "group": "basic",
+    "hiragana": "い",
+    "katakana": "イ",
+    "sound": "i",
+    "korean": "이"
+  },
+  {
+    "id": "u-う",
+    "group": "basic",
+    "hiragana": "う",
+    "katakana": "ウ",
+    "sound": "u",
+    "korean": "우"
+  },
+  {
+    "id": "e-え",
+    "group": "basic",
+    "hiragana": "え",
+    "katakana": "エ",
+    "sound": "e",
+    "korean": "에"
+  },
+  {
+    "id": "o-お",
+    "group": "basic",
+    "hiragana": "お",
+    "katakana": "オ",
+    "sound": "o",
+    "korean": "오"
+  },
+  {
+    "id": "ka-か",
+    "group": "basic",
+    "hiragana": "か",
+    "katakana": "カ",
+    "sound": "ka",
+    "korean": "카"
+  },
+  {
+    "id": "ki-き",
+    "group": "basic",
+    "hiragana": "き",
+    "katakana": "キ",
+    "sound": "ki",
+    "korean": "키"
+  },
+  {
+    "id": "ku-く",
+    "group": "basic",
+    "hiragana": "く",
+    "katakana": "ク",
+    "sound": "ku",
+    "korean": "쿠"
+  },
+  {
+    "id": "ke-け",
+    "group": "basic",
+    "hiragana": "け",
+    "katakana": "ケ",
+    "sound": "ke",
+    "korean": "케"
+  },
+  {
+    "id": "ko-こ",
+    "group": "basic",
+    "hiragana": "こ",
+    "katakana": "コ",
+    "sound": "ko",
+    "korean": "코"
+  },
+  {
+    "id": "sa-さ",
+    "group": "basic",
+    "hiragana": "さ",
+    "katakana": "サ",
+    "sound": "sa",
+    "korean": "사"
+  },
+  {
+    "id": "shi-し",
+    "group": "basic",
+    "hiragana": "し",
+    "katakana": "シ",
+    "sound": "shi",
+    "korean": "시"
+  },
+  {
+    "id": "su-す",
+    "group": "basic",
+    "hiragana": "す",
+    "katakana": "ス",
+    "sound": "su",
+    "korean": "스"
+  },
+  {
+    "id": "se-せ",
+    "group": "basic",
+    "hiragana": "せ",
+    "katakana": "セ",
+    "sound": "se",
+    "korean": "세"
+  },
+  {
+    "id": "so-そ",
+    "group": "basic",
+    "hiragana": "そ",
+    "katakana": "ソ",
+    "sound": "so",
+    "korean": "소"
+  },
+  {
+    "id": "ta-た",
+    "group": "basic",
+    "hiragana": "た",
+    "katakana": "タ",
+    "sound": "ta",
+    "korean": "타"
+  },
+  {
+    "id": "chi-ち",
+    "group": "basic",
+    "hiragana": "ち",
+    "katakana": "チ",
+    "sound": "chi",
+    "korean": "치"
+  },
+  {
+    "id": "tsu-つ",
+    "group": "basic",
+    "hiragana": "つ",
+    "katakana": "ツ",
+    "sound": "tsu",
+    "korean": "쓰"
+  },
+  {
+    "id": "te-て",
+    "group": "basic",
+    "hiragana": "て",
+    "katakana": "テ",
+    "sound": "te",
+    "korean": "테"
+  },
+  {
+    "id": "to-と",
+    "group": "basic",
+    "hiragana": "と",
+    "katakana": "ト",
+    "sound": "to",
+    "korean": "토"
+  },
+  {
+    "id": "na-な",
+    "group": "basic",
+    "hiragana": "な",
+    "katakana": "ナ",
+    "sound": "na",
+    "korean": "나"
+  },
+  {
+    "id": "ni-に",
+    "group": "basic",
+    "hiragana": "に",
+    "katakana": "ニ",
+    "sound": "ni",
+    "korean": "니"
+  },
+  {
+    "id": "nu-ぬ",
+    "group": "basic",
+    "hiragana": "ぬ",
+    "katakana": "ヌ",
+    "sound": "nu",
+    "korean": "누"
+  },
+  {
+    "id": "ne-ね",
+    "group": "basic",
+    "hiragana": "ね",
+    "katakana": "ネ",
+    "sound": "ne",
+    "korean": "네"
+  },
+  {
+    "id": "no-の",
+    "group": "basic",
+    "hiragana": "の",
+    "katakana": "ノ",
+    "sound": "no",
+    "korean": "노"
+  },
+  {
+    "id": "ha-は",
+    "group": "basic",
+    "hiragana": "は",
+    "katakana": "ハ",
+    "sound": "ha",
+    "korean": "하"
+  },
+  {
+    "id": "hi-ひ",
+    "group": "basic",
+    "hiragana": "ひ",
+    "katakana": "ヒ",
+    "sound": "hi",
+    "korean": "히"
+  },
+  {
+    "id": "fu-ふ",
+    "group": "basic",
+    "hiragana": "ふ",
+    "katakana": "フ",
+    "sound": "fu",
+    "korean": "후"
+  },
+  {
+    "id": "he-へ",
+    "group": "basic",
+    "hiragana": "へ",
+    "katakana": "ヘ",
+    "sound": "he",
+    "korean": "헤"
+  },
+  {
+    "id": "ho-ほ",
+    "group": "basic",
+    "hiragana": "ほ",
+    "katakana": "ホ",
+    "sound": "ho",
+    "korean": "호"
+  },
+  {
+    "id": "ma-ま",
+    "group": "basic",
+    "hiragana": "ま",
+    "katakana": "マ",
+    "sound": "ma",
+    "korean": "마"
+  },
+  {
+    "id": "mi-み",
+    "group": "basic",
+    "hiragana": "み",
+    "katakana": "ミ",
+    "sound": "mi",
+    "korean": "미"
+  },
+  {
+    "id": "mu-む",
+    "group": "basic",
+    "hiragana": "む",
+    "katakana": "ム",
+    "sound": "mu",
+    "korean": "무"
+  },
+  {
+    "id": "me-め",
+    "group": "basic",
+    "hiragana": "め",
+    "katakana": "メ",
+    "sound": "me",
+    "korean": "메"
+  },
+  {
+    "id": "mo-も",
+    "group": "basic",
+    "hiragana": "も",
+    "katakana": "モ",
+    "sound": "mo",
+    "korean": "모"
+  },
+  {
+    "id": "ya-や",
+    "group": "basic",
+    "hiragana": "や",
+    "katakana": "ヤ",
+    "sound": "ya",
+    "korean": "야"
+  },
+  {
+    "id": "yu-ゆ",
+    "group": "basic",
+    "hiragana": "ゆ",
+    "katakana": "ユ",
+    "sound": "yu",
+    "korean": "유"
+  },
+  {
+    "id": "yo-よ",
+    "group": "basic",
+    "hiragana": "よ",
+    "katakana": "ヨ",
+    "sound": "yo",
+    "korean": "요"
+  },
+  {
+    "id": "ra-ら",
+    "group": "basic",
+    "hiragana": "ら",
+    "katakana": "ラ",
+    "sound": "ra",
+    "korean": "라"
+  },
+  {
+    "id": "ri-り",
+    "group": "basic",
+    "hiragana": "り",
+    "katakana": "リ",
+    "sound": "ri",
+    "korean": "리"
+  },
+  {
+    "id": "ru-る",
+    "group": "basic",
+    "hiragana": "る",
+    "katakana": "ル",
+    "sound": "ru",
+    "korean": "루"
+  },
+  {
+    "id": "re-れ",
+    "group": "basic",
+    "hiragana": "れ",
+    "katakana": "レ",
+    "sound": "re",
+    "korean": "레"
+  },
+  {
+    "id": "ro-ろ",
+    "group": "basic",
+    "hiragana": "ろ",
+    "katakana": "ロ",
+    "sound": "ro",
+    "korean": "로"
+  },
+  {
+    "id": "wa-わ",
+    "group": "basic",
+    "hiragana": "わ",
+    "katakana": "ワ",
+    "sound": "wa",
+    "korean": "와"
+  },
+  {
+    "id": "o-を",
+    "group": "basic",
+    "hiragana": "を",
+    "katakana": "ヲ",
+    "sound": "o",
+    "korean": "오"
+  },
+  {
+    "id": "n-ん",
+    "group": "basic",
+    "hiragana": "ん",
+    "katakana": "ン",
+    "sound": "n",
+    "korean": "응"
+  },
+  {
+    "id": "ga-が",
+    "group": "voiced",
+    "hiragana": "が",
+    "katakana": "ガ",
+    "sound": "ga",
+    "korean": "가"
+  },
+  {
+    "id": "gi-ぎ",
+    "group": "voiced",
+    "hiragana": "ぎ",
+    "katakana": "ギ",
+    "sound": "gi",
+    "korean": "기"
+  },
+  {
+    "id": "gu-ぐ",
+    "group": "voiced",
+    "hiragana": "ぐ",
+    "katakana": "グ",
+    "sound": "gu",
+    "korean": "구"
+  },
+  {
+    "id": "ge-げ",
+    "group": "voiced",
+    "hiragana": "げ",
+    "katakana": "ゲ",
+    "sound": "ge",
+    "korean": "게"
+  },
+  {
+    "id": "go-ご",
+    "group": "voiced",
+    "hiragana": "ご",
+    "katakana": "ゴ",
+    "sound": "go",
+    "korean": "고"
+  },
+  {
+    "id": "za-ざ",
+    "group": "voiced",
+    "hiragana": "ざ",
+    "katakana": "ザ",
+    "sound": "za",
+    "korean": "자"
+  },
+  {
+    "id": "ji-じ",
+    "group": "voiced",
+    "hiragana": "じ",
+    "katakana": "ジ",
+    "sound": "ji",
+    "korean": "지"
+  },
+  {
+    "id": "zu-ず",
+    "group": "voiced",
+    "hiragana": "ず",
+    "katakana": "ズ",
+    "sound": "zu",
+    "korean": "즈"
+  },
+  {
+    "id": "ze-ぜ",
+    "group": "voiced",
+    "hiragana": "ぜ",
+    "katakana": "ゼ",
+    "sound": "ze",
+    "korean": "제"
+  },
+  {
+    "id": "zo-ぞ",
+    "group": "voiced",
+    "hiragana": "ぞ",
+    "katakana": "ゾ",
+    "sound": "zo",
+    "korean": "조"
+  },
+  {
+    "id": "da-だ",
+    "group": "voiced",
+    "hiragana": "だ",
+    "katakana": "ダ",
+    "sound": "da",
+    "korean": "다"
+  },
+  {
+    "id": "ji-ぢ",
+    "group": "voiced",
+    "hiragana": "ぢ",
+    "katakana": "ヂ",
+    "sound": "ji",
+    "korean": "지"
+  },
+  {
+    "id": "zu-づ",
+    "group": "voiced",
+    "hiragana": "づ",
+    "katakana": "ヅ",
+    "sound": "zu",
+    "korean": "즈"
+  },
+  {
+    "id": "de-で",
+    "group": "voiced",
+    "hiragana": "で",
+    "katakana": "デ",
+    "sound": "de",
+    "korean": "데"
+  },
+  {
+    "id": "do-ど",
+    "group": "voiced",
+    "hiragana": "ど",
+    "katakana": "ド",
+    "sound": "do",
+    "korean": "도"
+  },
+  {
+    "id": "ba-ば",
+    "group": "voiced",
+    "hiragana": "ば",
+    "katakana": "バ",
+    "sound": "ba",
+    "korean": "바"
+  },
+  {
+    "id": "bi-び",
+    "group": "voiced",
+    "hiragana": "び",
+    "katakana": "ビ",
+    "sound": "bi",
+    "korean": "비"
+  },
+  {
+    "id": "bu-ぶ",
+    "group": "voiced",
+    "hiragana": "ぶ",
+    "katakana": "ブ",
+    "sound": "bu",
+    "korean": "부"
+  },
+  {
+    "id": "be-べ",
+    "group": "voiced",
+    "hiragana": "べ",
+    "katakana": "ベ",
+    "sound": "be",
+    "korean": "베"
+  },
+  {
+    "id": "bo-ぼ",
+    "group": "voiced",
+    "hiragana": "ぼ",
+    "katakana": "ボ",
+    "sound": "bo",
+    "korean": "보"
+  },
+  {
+    "id": "pa-ぱ",
+    "group": "voiced",
+    "hiragana": "ぱ",
+    "katakana": "パ",
+    "sound": "pa",
+    "korean": "파"
+  },
+  {
+    "id": "pi-ぴ",
+    "group": "voiced",
+    "hiragana": "ぴ",
+    "katakana": "ピ",
+    "sound": "pi",
+    "korean": "피"
+  },
+  {
+    "id": "pu-ぷ",
+    "group": "voiced",
+    "hiragana": "ぷ",
+    "katakana": "プ",
+    "sound": "pu",
+    "korean": "푸"
+  },
+  {
+    "id": "pe-ぺ",
+    "group": "voiced",
+    "hiragana": "ぺ",
+    "katakana": "ペ",
+    "sound": "pe",
+    "korean": "페"
+  },
+  {
+    "id": "po-ぽ",
+    "group": "voiced",
+    "hiragana": "ぽ",
+    "katakana": "ポ",
+    "sound": "po",
+    "korean": "포"
+  },
+  {
+    "id": "kya-きゃ",
+    "group": "combo",
+    "hiragana": "きゃ",
+    "katakana": "キャ",
+    "sound": "kya",
+    "korean": "캬"
+  },
+  {
+    "id": "kyu-きゅ",
+    "group": "combo",
+    "hiragana": "きゅ",
+    "katakana": "キュ",
+    "sound": "kyu",
+    "korean": "큐"
+  },
+  {
+    "id": "kyo-きょ",
+    "group": "combo",
+    "hiragana": "きょ",
+    "katakana": "キョ",
+    "sound": "kyo",
+    "korean": "쿄"
+  },
+  {
+    "id": "sha-しゃ",
+    "group": "combo",
+    "hiragana": "しゃ",
+    "katakana": "シャ",
+    "sound": "sha",
+    "korean": "샤"
+  },
+  {
+    "id": "shu-しゅ",
+    "group": "combo",
+    "hiragana": "しゅ",
+    "katakana": "シュ",
+    "sound": "shu",
+    "korean": "슈"
+  },
+  {
+    "id": "sho-しょ",
+    "group": "combo",
+    "hiragana": "しょ",
+    "katakana": "ショ",
+    "sound": "sho",
+    "korean": "쇼"
+  },
+  {
+    "id": "cha-ちゃ",
+    "group": "combo",
+    "hiragana": "ちゃ",
+    "katakana": "チャ",
+    "sound": "cha",
+    "korean": "차"
+  },
+  {
+    "id": "chu-ちゅ",
+    "group": "combo",
+    "hiragana": "ちゅ",
+    "katakana": "チュ",
+    "sound": "chu",
+    "korean": "추"
+  },
+  {
+    "id": "cho-ちょ",
+    "group": "combo",
+    "hiragana": "ちょ",
+    "katakana": "チョ",
+    "sound": "cho",
+    "korean": "초"
+  },
+  {
+    "id": "nya-にゃ",
+    "group": "combo",
+    "hiragana": "にゃ",
+    "katakana": "ニャ",
+    "sound": "nya",
+    "korean": "냐"
+  },
+  {
+    "id": "nyu-にゅ",
+    "group": "combo",
+    "hiragana": "にゅ",
+    "katakana": "ニュ",
+    "sound": "nyu",
+    "korean": "뉴"
+  },
+  {
+    "id": "nyo-にょ",
+    "group": "combo",
+    "hiragana": "にょ",
+    "katakana": "ニョ",
+    "sound": "nyo",
+    "korean": "뇨"
+  },
+  {
+    "id": "hya-ひゃ",
+    "group": "combo",
+    "hiragana": "ひゃ",
+    "katakana": "ヒャ",
+    "sound": "hya",
+    "korean": "햐"
+  },
+  {
+    "id": "hyu-ひゅ",
+    "group": "combo",
+    "hiragana": "ひゅ",
+    "katakana": "ヒュ",
+    "sound": "hyu",
+    "korean": "휴"
+  },
+  {
+    "id": "hyo-ひょ",
+    "group": "combo",
+    "hiragana": "ひょ",
+    "katakana": "ヒョ",
+    "sound": "hyo",
+    "korean": "효"
+  },
+  {
+    "id": "mya-みゃ",
+    "group": "combo",
+    "hiragana": "みゃ",
+    "katakana": "ミャ",
+    "sound": "mya",
+    "korean": "먀"
+  },
+  {
+    "id": "myu-みゅ",
+    "group": "combo",
+    "hiragana": "みゅ",
+    "katakana": "ミュ",
+    "sound": "myu",
+    "korean": "뮤"
+  },
+  {
+    "id": "myo-みょ",
+    "group": "combo",
+    "hiragana": "みょ",
+    "katakana": "ミョ",
+    "sound": "myo",
+    "korean": "묘"
+  },
+  {
+    "id": "rya-りゃ",
+    "group": "combo",
+    "hiragana": "りゃ",
+    "katakana": "リャ",
+    "sound": "rya",
+    "korean": "랴"
+  },
+  {
+    "id": "ryu-りゅ",
+    "group": "combo",
+    "hiragana": "りゅ",
+    "katakana": "リュ",
+    "sound": "ryu",
+    "korean": "류"
+  },
+  {
+    "id": "ryo-りょ",
+    "group": "combo",
+    "hiragana": "りょ",
+    "katakana": "リョ",
+    "sound": "ryo",
+    "korean": "료"
+  },
+  {
+    "id": "gya-ぎゃ",
+    "group": "combo",
+    "hiragana": "ぎゃ",
+    "katakana": "ギャ",
+    "sound": "gya",
+    "korean": "갸"
+  },
+  {
+    "id": "gyu-ぎゅ",
+    "group": "combo",
+    "hiragana": "ぎゅ",
+    "katakana": "ギュ",
+    "sound": "gyu",
+    "korean": "규"
+  },
+  {
+    "id": "gyo-ぎょ",
+    "group": "combo",
+    "hiragana": "ぎょ",
+    "katakana": "ギョ",
+    "sound": "gyo",
+    "korean": "교"
+  },
+  {
+    "id": "ja-じゃ",
+    "group": "combo",
+    "hiragana": "じゃ",
+    "katakana": "ジャ",
+    "sound": "ja",
+    "korean": "자"
+  },
+  {
+    "id": "ju-じゅ",
+    "group": "combo",
+    "hiragana": "じゅ",
+    "katakana": "ジュ",
+    "sound": "ju",
+    "korean": "주"
+  },
+  {
+    "id": "jo-じょ",
+    "group": "combo",
+    "hiragana": "じょ",
+    "katakana": "ジョ",
+    "sound": "jo",
+    "korean": "조"
+  },
+  {
+    "id": "bya-びゃ",
+    "group": "combo",
+    "hiragana": "びゃ",
+    "katakana": "ビャ",
+    "sound": "bya",
+    "korean": "뱌"
+  },
+  {
+    "id": "byu-びゅ",
+    "group": "combo",
+    "hiragana": "びゅ",
+    "katakana": "ビュ",
+    "sound": "byu",
+    "korean": "뷰"
+  },
+  {
+    "id": "byo-びょ",
+    "group": "combo",
+    "hiragana": "びょ",
+    "katakana": "ビョ",
+    "sound": "byo",
+    "korean": "뵤"
+  },
+  {
+    "id": "pya-ぴゃ",
+    "group": "combo",
+    "hiragana": "ぴゃ",
+    "katakana": "ピャ",
+    "sound": "pya",
+    "korean": "퍄"
+  },
+  {
+    "id": "pyu-ぴゅ",
+    "group": "combo",
+    "hiragana": "ぴゅ",
+    "katakana": "ピュ",
+    "sound": "pyu",
+    "korean": "퓨"
+  },
+  {
+    "id": "pyo-ぴょ",
+    "group": "combo",
+    "hiragana": "ぴょ",
+    "katakana": "ピョ",
+    "sound": "pyo",
+    "korean": "표"
+  }
+]
