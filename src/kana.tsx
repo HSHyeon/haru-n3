@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { ArrowRight, Check, RotateCcw, Volume2, X } from 'lucide-react';
 import kana from './data/kana.json';
 import { questions, type Question } from './kana-quiz';
 
@@ -49,6 +50,61 @@ export function KanaStudy({ speak }: { speak: (text: string) => void }) {
   const [answer, setAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
+  const studyRef = useRef<HTMLDivElement>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  const promptRef = useRef<HTMLHeadingElement>(null);
+  const quizOpen = quiz !== null;
+  useEffect(() => {
+    if (!quizOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    const previousFocus = document.activeElement;
+    document.body.style.overflow = 'hidden';
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        setQuiz(null);
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const controls = [
+        ...(dialogRef.current?.querySelectorAll<HTMLElement>(
+          'button:not(:disabled), [tabindex="0"]',
+        ) || []),
+      ];
+      const first = controls[0],
+        last = controls[controls.length - 1];
+      if (!dialogRef.current?.contains(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first)?.focus();
+      } else if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    };
+    document.addEventListener('keydown', handleKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener('keydown', handleKey);
+      if (
+        previousFocus instanceof HTMLElement &&
+        previousFocus !== document.body &&
+        previousFocus.isConnected
+      )
+        previousFocus.focus({ preventScroll: true });
+      else
+        studyRef.current
+          ?.querySelector<HTMLElement>('.kana-practice .primary')
+          ?.focus({ preventScroll: true });
+    };
+  }, [quizOpen]);
+  useEffect(() => {
+    if (!quizOpen) return;
+    if (dialogRef.current) dialogRef.current.scrollTop = 0;
+    promptRef.current?.focus({ preventScroll: true });
+  }, [quizOpen, step, finished]);
   const items = kana.filter((item) => item.group === group);
   const selected = items.find((item) => item.id === selectedId) || items[0];
   const known = items.filter((item) => progress.known.includes(keyOf(script, item))).length;
@@ -100,7 +156,7 @@ export function KanaStudy({ speak }: { speak: (text: string) => void }) {
     setQuiz(null);
   };
   return (
-    <div className="kana-study">
+    <div className="kana-study" ref={studyRef}>
       <div className="kana-tabs" aria-label="문자 종류">
         {scripts.map(({ id, label }) => (
           <button
@@ -138,95 +194,119 @@ export function KanaStudy({ speak }: { speak: (text: string) => void }) {
           <i style={{ width: `${(known / items.length) * 100}%` }} />
         </div>
       </div>
-      {storageError && (
+      {storageError && !quizOpen && (
         <p role="alert" className="song-storage-error">
           기록을 저장하지 못했어요. 브라우저 저장 공간을 확인해 주세요.
         </p>
       )}
       {quiz && current ? (
-        <section className="kana-quiz" aria-label="가나 퀴즈">
-          {finished ? (
-            <div className="kana-result" role="status">
-              <span className="eyebrow">ONE SOUND CLOSER</span>
-              <h2>소리가 조금 더 익숙해졌어요.</h2>
-              <p>
-                {quiz.length}문제 중 {score}문제 정답
-              </p>
-              <button className="primary" onClick={() => start(false)}>
-                다시 연습하기 <RotateCcw size={16} />
+        createPortal(
+          <div className="modal-backdrop kana-quiz-backdrop">
+            <section
+              className="modal kana-quiz kana-quiz-dialog"
+              ref={dialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="가나 퀴즈"
+            >
+              <button className="close" aria-label="가나 퀴즈 닫기" onClick={() => setQuiz(null)}>
+                <X size={20} />
               </button>
-              <button className="secondary-button" onClick={() => setQuiz(null)}>
-                문자표로 돌아가기
-              </button>
-            </div>
-          ) : (
-            <>
-              <div className="section-title">
-                <span className="eyebrow">
-                  KANA QUIZ · {step + 1} / {quiz.length}
-                </span>
-                <button className="text-link" onClick={() => setQuiz(null)}>
-                  퀴즈 나가기
-                </button>
-              </div>
-              <p>이 글자는 어떻게 읽을까요?</p>
-              <h2 className="kana-question" lang="ja">
-                {current.item[script]}
-              </h2>
-              <div className="answers">
-                {current.choices.map((choice) => (
-                  <button
-                    key={choice.sound}
-                    disabled={answer !== null}
-                    onClick={() => choose(choice.sound)}
-                    className={
-                      answer === null
-                        ? ''
-                        : choice.sound === current.item.sound
-                          ? 'correct'
-                          : choice.sound === answer
-                            ? 'incorrect'
-                            : ''
-                    }
-                  >
-                    {choice.label}
-                    {answer !== null && choice.sound === current.item.sound && <Check size={16} />}
-                  </button>
-                ))}
-              </div>
-              {answer !== null && (
-                <div className="kana-feedback" role="status">
-                  <strong>
-                    {answer === current.item.sound
-                      ? '잘 기억했어요!'
-                      : '한 번 더 소리와 연결해 봐요.'}
-                  </strong>
+              {storageError && (
+                <p role="alert">기록을 저장하지 못했어요. 브라우저 저장 공간을 확인해 주세요.</p>
+              )}
+              {finished ? (
+                <div className="kana-result" role="status">
+                  <span className="eyebrow">ONE SOUND CLOSER</span>
+                  <h2 ref={promptRef} tabIndex={-1}>
+                    소리가 조금 더 익숙해졌어요.
+                  </h2>
                   <p>
-                    <span lang="ja">
-                      {current.item.hiragana} / {current.item.katakana}
-                    </span>{' '}
-                    · {current.item.korean} · {current.item.sound}
+                    {quiz.length}문제 중 {score}문제 정답
                   </p>
-                  <button className="secondary-button" onClick={() => speak(current.item.hiragana)}>
-                    <Volume2 size={16} /> 정답 발음 듣기
+                  <button className="primary" onClick={() => start(false)}>
+                    다시 연습하기 <RotateCcw size={16} />
                   </button>
-                  <button
-                    className="primary"
-                    onClick={() => {
-                      if (step === quiz.length - 1) setFinished(true);
-                      else {
-                        setStep((value) => value + 1);
-                        setAnswer(null);
-                      }
-                    }}
-                  >
-                    {step === quiz.length - 1 ? '결과 보기' : '다음 글자'} <ArrowRight size={16} />
+                  <button className="secondary-button" onClick={() => setQuiz(null)}>
+                    문자표로 돌아가기
                   </button>
                 </div>
+              ) : (
+                <>
+                  <div className="section-title">
+                    <span className="eyebrow">
+                      KANA QUIZ · {step + 1} / {quiz.length}
+                    </span>
+                  </div>
+                  <p>이 글자는 어떻게 읽을까요?</p>
+                  <h2 className="kana-question" lang="ja" ref={promptRef} tabIndex={-1}>
+                    {current.item[script]}
+                  </h2>
+                  <div className="answers">
+                    {current.choices.map((choice) => (
+                      <button
+                        key={choice.sound}
+                        disabled={answer !== null}
+                        onClick={() => choose(choice.sound)}
+                        className={
+                          answer === null
+                            ? ''
+                            : choice.sound === current.item.sound
+                              ? 'correct'
+                              : choice.sound === answer
+                                ? 'incorrect'
+                                : ''
+                        }
+                      >
+                        {choice.label}
+                        {answer !== null && choice.sound === current.item.sound && (
+                          <Check size={16} />
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                  {answer !== null && (
+                    <div className="kana-feedback" role="status">
+                      <strong>
+                        {answer === current.item.sound
+                          ? '잘 기억했어요!'
+                          : '한 번 더 소리와 연결해 봐요.'}
+                      </strong>
+                      <p>
+                        <span lang="ja">
+                          {current.item.hiragana} / {current.item.katakana}
+                        </span>{' '}
+                        · {current.item.korean} · {current.item.sound}
+                      </p>
+                      <div className="kana-feedback-actions">
+                        <button
+                          className="secondary-button"
+                          onClick={() => speak(current.item.hiragana)}
+                        >
+                          <Volume2 size={16} /> 정답 발음 듣기
+                        </button>
+                        <button
+                          className="primary"
+                          onClick={() => {
+                            if (step === quiz.length - 1) setFinished(true);
+                            else {
+                              setStep((value) => value + 1);
+                              setAnswer(null);
+                            }
+                          }}
+                        >
+                          {step === quiz.length - 1 ? '결과 보기' : '다음 글자'}{' '}
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
-            </>
-          )}
-        </section>
+            </section>
+          </div>,
+          document.body,
+        )
       ) : (
         <>
           <section className="kana-focus" aria-label="선택한 글자">
