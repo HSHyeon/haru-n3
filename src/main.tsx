@@ -20,6 +20,8 @@ import {
 import './style.css';
 import { PwaControls } from './pwa';
 import { KanaStudy } from './kana';
+import { WebVocabulary } from './web-vocabulary';
+import { shuffle } from './word-quiz';
 import { musicWords, RecordArt } from './music';
 import { SongLibrary, songWords, songWordEntries, songCourses, SONG_WORD_OFFSET } from './songs';
 const n3Words = [
@@ -123,6 +125,8 @@ const studyTabs = ['가나 연습', '단어장', '문법 노트'];
 function App() {
   const [tab, setTab] = useState('홈');
   const [lastStudyTab, setLastStudyTab] = useState('가나 연습');
+  const [wordSource, setWordSource] = useState<'web' | 'local'>('web');
+  const [quizChoices, setQuizChoices] = useState<Record<number, string[]>>({});
   const [saved, setSaved] = useState<Saved>(read);
   const [quiz, setQuiz] = useState<number[] | null>(null);
   const [step, setStep] = useState(0);
@@ -140,7 +144,10 @@ function App() {
     localStorage.setItem('haru-n3', JSON.stringify(next));
   };
   const start = (ids: number[]) => {
-    setQuiz(ids);
+    const selected = shuffle([...new Set(ids)].filter((id) => id in words));
+    if (!selected.length) return;
+    setQuiz(selected);
+    setQuizChoices(Object.fromEntries(selected.map((id) => [id, shuffle(words[id].choices)])));
     setStep(0);
     setAnswer(null);
     setFinished(false);
@@ -280,6 +287,19 @@ function App() {
                 ))}
               </nav>
             )}
+            {tab === '단어장' && (
+              <nav className="word-source-tabs" aria-label="단어 출처">
+                <button aria-pressed={wordSource === 'web'} onClick={() => setWordSource('web')}>
+                  웹 N3
+                </button>
+                <button
+                  aria-pressed={wordSource === 'local'}
+                  onClick={() => setWordSource('local')}
+                >
+                  내 단어 · 한국어 뜻
+                </button>
+              </nav>
+            )}
             {tab === '홈' ? (
               <>
                 <section className="hero music-hero">
@@ -308,14 +328,17 @@ function App() {
                 </section>
                 <button
                   className="listening-banner"
-                  onClick={() => start(n3Words.map((_, i) => i))}
+                  onClick={() => {
+                    setWordSource('web');
+                    setTab('단어장');
+                  }}
                 >
                   <span className="listening-banner-icon">
                     <BookOpen size={20} />
                   </span>
                   <span>
-                    <b>오늘의 N3 공부도, 차근차근.</b>
-                    <small>일상 단어 {n3Words.length}개로 시험 공부 이어가기</small>
+                    <b>오늘은 새로운 N3 단어로.</b>
+                    <small>웹 단어를 불러와 랜덤으로 연습하기</small>
                   </span>
                   <ArrowRight size={18} />
                 </button>
@@ -470,6 +493,8 @@ function App() {
               <KanaStudy speak={speak} />
             ) : tab === '음악 공부방' ? (
               <SongLibrary start={start} speak={speak} done={saved.done} wrong={saved.wrong} />
+            ) : tab === '단어장' && wordSource === 'web' ? (
+              <WebVocabulary speak={speak} />
             ) : tab === '문법 노트' ? (
               <div className="grammar-list">
                 {grammar.map((g, i) => (
@@ -620,7 +645,7 @@ function App() {
                   {words[quiz[step]].reading} <Volume2 size={17} />
                 </button>
                 <div className="answers">
-                  {words[quiz[step]].choices.map((c) => (
+                  {quizChoices[quiz[step]].map((c) => (
                     <button
                       disabled={!!answer}
                       className={
